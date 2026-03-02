@@ -1,0 +1,16 @@
+version: v1
+name: buf.build/code-with-the-boys/user-service
+deps:
+  - buf.build/googleapis/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+breaking:
+  use:
+    - FILE
+lint:
+  use:
+    - DEFAULT
+  except:
+    - FIELD_NOT_REQUIRED
+    - PACKAGE_NO_IMPORT_CYCLE
+    - IMPORT_NO_PUBLIC
+    - ENUM_VALUE_PREFIX
