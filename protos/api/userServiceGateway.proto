@@ -6,51 +6,264 @@ option go_package = "github.com/code-with-the-boys/UserService/gen/go/userServic
 
 import "google/protobuf/timestamp.proto";
 import "google/protobuf/empty.proto";
+import "vendor.proto/google/api/annotations.proto";
+import "vendor.proto/protoc-gen-openapiv2/options/annotations.proto";
+
+option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_swagger) = {
+    info: {
+        title: "User Service API";
+        version: "1.0.0";
+        description: "Микросервис для управления пользователями";
+        contact: {
+            name: "Support Team";
+            email: "support@example.com";
+        };
+    };
+    host: "localhost:8080";
+    base_path: "/api/v1";
+    schemes: HTTP;
+    schemes: HTTPS;
+    consumes: "application/json";
+    produces: "application/json";
+    security_definitions: {
+        security: {
+            key: "bearerAuth";
+            value: {
+                type: TYPE_API_KEY;
+                in: IN_HEADER;
+                name: "Authorization";
+                description: "JWT токен для аутентификации";
+            }
+        }
+    }
+    security: {
+        security_requirement: {
+            key: "bearerAuth";
+            value: {};
+        }
+    }
+};
 
 // Единый сервис для управления пользователями
 service UserService {
     // Auth operations
     // Регистрация нового пользователя в системе
-    rpc SignUp(SignUpRequest) returns (SignUpResponse);
+    rpc SignUp(SignUpRequest) returns (SignUpResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/users"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Создать нового пользователя";
+            description: "Регистрация нового пользователя в системе";
+            tags: "Users";
+            responses: {
+                key: "201";
+                value: {
+                    description: "Пользователь создан";
+                }
+            };
+            responses: {
+                key: "400";
+                value: {
+                    description: "Неверные данные";
+                    schema: {
+                        json_schema: {
+                            ref: "#/components/schemas/Error";
+                        }
+                    }
+                }
+            };
+            responses: {
+                key: "409";
+                value: {
+                    description: "Email уже существует";
+                    schema: {
+                        json_schema: {
+                            ref: "#/components/schemas/Error";
+                        }
+                    }
+                }
+            };
+        };
+    }
     
     // Аутентификация пользователя и получение токенов доступа
-    rpc Login(LoginRequest) returns (LoginResponse);
+    rpc Login(LoginRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/auth/login"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Аутентификация пользователя";
+            description: "Вход в систему и получение JWT токенов";
+            tags: "Auth";
+        };
+    }
     
     // Обновление пары токенов доступа с использованием refresh token
-    rpc RefreshToken(RefreshTokenRequest) returns (LoginResponse);
+    rpc RefreshToken(RefreshTokenRequest) returns (LoginResponse) {
+        option (google.api.http) = {
+            post: "/api/v1/auth/refresh"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Обновить токены доступа";
+            description: "Получение новой пары токенов по refresh token";
+            tags: "Auth";
+        };
+    }
     
     // Завершение сессии пользователя и инвалидация refresh token
-    rpc Logout(LogoutRequest) returns (google.protobuf.Empty);
+    rpc Logout(LogoutRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            post: "/api/v1/auth/logout"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Выйти из системы";
+            description: "Завершение сессии и инвалидация refresh token";
+            tags: "Auth";
+        };
+    }
     
     // User operations
     // Получение информации о пользователе по его идентификатору
-    rpc GetUser(GetUserRequest) returns (GetUserResponse);
+    rpc GetUser(GetUserRequest) returns (GetUserResponse) {
+        option (google.api.http) = {
+            get: "/api/v1/users/{user_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Получить пользователя по ID";
+            description: "Возвращает информацию о пользователе";
+            tags: "Users";
+            responses: {
+                key: "200";
+                value: {
+                    description: "Успешный ответ";
+                }
+            };
+            responses: {
+                key: "404";
+                value: {
+                    description: "Пользователь не найден";
+                    schema: {
+                        json_schema: {
+                            ref: "#/components/schemas/Error";
+                        }
+                    }
+                }
+            };
+        };
+    }
     
     // Обновление данных пользователя
-    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse);
+    rpc UpdateUser(UpdateUserRequest) returns (UpdateUserResponse) {
+        option (google.api.http) = {
+            put: "/api/v1/users/{user_id}"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Обновить пользователя";
+            description: "Обновление данных пользователя";
+            tags: "Users";
+        };
+    }
     
     // Удаление пользователя из системы (мягкое или жесткое удаление)
-    rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty);
+    rpc DeleteUser(DeleteUserRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/users/{user_id}"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Удалить пользователя";
+            description: "Мягкое или жесткое удаление пользователя";
+            tags: "Users";
+            responses: {
+                key: "204";
+                value: {
+                    description: "Пользователь удален";
+                }
+            };
+        };
+    }
     
     // Profile operations
     // Создание профиля пользователя
-    rpc CreateUserProfile(CreateUserProfileRequest) returns (UserProfile);
+    rpc CreateUserProfile(CreateUserProfileRequest) returns (UserProfile) {
+        option (google.api.http) = {
+            post: "/api/v1/users/{user_id}/profile"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Создать профиль пользователя";
+            description: "Создание профиля для существующего пользователя";
+            tags: "Profiles";
+        };
+    }
     
     // Получение профиля пользователя
-    rpc GetUserProfile(GetUserProfileRequest) returns (UserProfile);
+    rpc GetUserProfile(GetUserProfileRequest) returns (UserProfile) {
+        option (google.api.http) = {
+            get: "/api/v1/users/{user_id}/profile"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Получить профиль пользователя";
+            description: "Возвращает профиль пользователя по ID";
+            tags: "Profiles";
+        };
+    }
     
     // Обновление профиля пользователя
-    rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UserProfile);
+    rpc UpdateUserProfile(UpdateUserProfileRequest) returns (UserProfile) {
+        option (google.api.http) = {
+            put: "/api/v1/users/{user_id}/profile"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Обновить профиль пользователя";
+            description: "Обновление данных профиля";
+            tags: "Profiles";
+        };
+    }
     
     // Удаление профиля пользователя
-    rpc DeleteUserProfile(DeleteUserProfileRequest) returns (google.protobuf.Empty);
+    rpc DeleteUserProfile(DeleteUserProfileRequest) returns (google.protobuf.Empty) {
+        option (google.api.http) = {
+            delete: "/api/v1/users/{user_id}/profile"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Удалить профиль пользователя";
+            description: "Удаление профиля пользователя";
+            tags: "Profiles";
+        };
+    }
     
     // Settings operations
     // Получение настроек пользователя
-    rpc GetUserSettings(GetUserSettingsRequest) returns (UserSettings);
+    rpc GetUserSettings(GetUserSettingsRequest) returns (UserSettings) {
+        option (google.api.http) = {
+            get: "/api/v1/users/{user_id}/settings"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Получить настройки пользователя";
+            description: "Возвращает настройки пользователя";
+            tags: "Settings";
+        };
+    }
     
     // Обновление настроек пользователя
-    rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UserSettings);
+    rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UserSettings) {
+        option (google.api.http) = {
+            put: "/api/v1/users/{user_id}/settings"
+            body: "*"
+        };
+        option (grpc.gateway.protoc_gen_openapiv2.options.openapiv2_operation) = {
+            summary: "Обновить настройки пользователя";
+            description: "Обновление настроек пользователя";
+            tags: "Settings";
+        };
+    }
 }
 
 // Enums
@@ -267,4 +480,11 @@ message UpdateUserSettingsRequest {
     optional string language = 3;                      // Новый язык интерфейса
     optional string timezone = 4;                      // Новый часовой пояс
     optional PrivacyLevel privacy_level = 5;           // Новый уровень приватности
+}
+
+// Error message for responses
+message Error {
+    int32 code = 1;          // Код ошибки
+    string message = 2;      // Сообщение об ошибке
+    string details = 3;      // Детали ошибки
 }
