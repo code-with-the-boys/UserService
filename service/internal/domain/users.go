@@ -1,6 +1,6 @@
 // domain/model/user.go
 
-package model
+package domain
 
 import (
 	"time"
