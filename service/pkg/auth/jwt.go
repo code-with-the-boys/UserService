@@ -34,12 +34,12 @@ type claims struct {
 }
 
 func (j *jwtService) GenerateTokens(user *domain.User) (string, string, error) {
-	accessToken, err := generateToken(user, "access", time.Minute*5, j.accessSecretKey)
+	accessToken, err := generateToken(user, "access", time.Minute*15, j.accessSecretKey)
 	if err != nil {
 		return "", "", err
 	}
 
-	refreshToken, err := generateToken(user, "refresh", time.Hour*24*7, j.refreshSecretKey)
+	refreshToken, err := generateToken(user, "refresh", time.Hour*7*24, j.refreshSecretKey)
 	if err != nil {
 		return "", "", err
 	}
@@ -55,7 +55,7 @@ func generateToken(user *domain.User, tokenType string, duration time.Duration, 
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expirationTime),
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
-			Issuer:    "Shop-system",
+			Issuer:    "UserService",
 			Subject:   tokenType,
 		},
 	}
@@ -92,7 +92,7 @@ func (j *jwtService) ValidateToken(tokenString string) (*domain.User, error) {
 		}
 
 		return []byte(secretKey), nil
-	})
+	}, jwt.WithValidMethods([]string{"HS256"}))
 
 	if err != nil || !validToken.Valid {
 		return nil, errors.New("Invalid token")

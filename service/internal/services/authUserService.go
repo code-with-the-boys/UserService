@@ -2,9 +2,7 @@ package service
 
 import (
 	"context"
-	"database/sql"
 	"errors"
-	"strings"
 	"time"
 
 	"github.com/code-with-the-boys/UserService/internal/customErrors"
@@ -15,7 +13,6 @@ import (
 	"go.uber.org/zap"
 	"golang.org/x/crypto/bcrypt"
 )
-
 
 type UserServiceLogoutRequest struct {
 	RefreshToken string `json:"refresh_token"`
@@ -63,6 +60,7 @@ type authUserService struct {
 	logger       zap.Logger
 	jwt          auth.JwtAuth
 	redisRepo    redisRepo.RefreshTokenRepo
+	validator    validationsStuff
 }
 
 func NewAuthUserService(loggerZ *zap.Logger, repo psqlrepo.AuthUserRepo, redisRepo redisRepo.RefreshTokenRepo, jwt auth.JwtAuth) AuthUserService {
@@ -71,18 +69,15 @@ func NewAuthUserService(loggerZ *zap.Logger, repo psqlrepo.AuthUserRepo, redisRe
 		logger:       *loggerZ,
 		jwt:          jwt,
 		redisRepo:    redisRepo,
+		validator:    NewValidationsStuff(loggerZ, repo),
 	}
 
 }
 
 func (s *authUserService) CreateUser(ctx context.Context, request *UserServiceSignUpRequest) (*UserServiceSignUpResponse, error) {
 
-	if request.Email == "" {
-		s.logger.Warn("missing required field",
-			zap.String("field", "email"),
-			zap.String("validation_error", "email is empty"),
-		)
-		return nil, customErrors.NewInvalidArgumentError("Empty email")
+	if err := s.validator.ValidateEmailAndPhone(request.Email, request.Phone); err != nil {
+		return nil, err
 	}
 
 	if request.Password == "" {
@@ -93,42 +88,18 @@ func (s *authUserService) CreateUser(ctx context.Context, request *UserServiceSi
 		return nil, customErrors.NewInvalidArgumentError("Empty password")
 	}
 
-	if request.Phone == "" {
-		s.logger.Warn("missing required field",
-			zap.String("field", "phone"),
-			zap.String("validation_error", "phone is empty"),
-		)
-		return nil, customErrors.NewInvalidArgumentError("Empty phone")
-	}
-
-	if len(request.Phone) != 11 {
-		s.logger.Warn("missing required field",
-			zap.String("field", "phone"),
-			zap.String("validation_error", "phone is not valid"),
-		)
-		return nil, customErrors.NewInvalidArgumentError("Invalid phone")
-	}
-
 	if len(request.Password) < 8 {
 		s.logger.Warn("missing required field",
 			zap.String("field", "password"),
 			zap.String("validation_error", "password is not valid"),
 		)
-		return nil, customErrors.NewInvalidArgumentError("Invalid password")
-	}
-
-	if !isValidEmail(request.Email) {
-		s.logger.Warn("missing required field",
-			zap.String("field", "email"),
-			zap.String("validation_error", "email is not valid"),
-		)
-		return nil, customErrors.NewInvalidArgumentError("Invalid email")
+		return nil, customErrors.NewInvalidArgumentError("Invalid password length less than 8 characters")
 	}
 
 	userByEmail, err := s.authUserRepo.FindUserByEmail(ctx, request.Email)
 
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
+		if errors.Is(err, psqlrepo.ErrNotFound) {
 			s.logger.Info("user not found by email, can proceed with creation",
 				zap.String("email", request.Email))
 		} else {
@@ -144,10 +115,10 @@ func (s *authUserService) CreateUser(ctx context.Context, request *UserServiceSi
 		return nil, customErrors.NewAlreadyExistsError("User with this email already exists")
 	}
 
-	userByPhone, err := s.authUserRepo.FindUserByPhone(ctx, request.Email)
+	userByPhone, err := s.authUserRepo.FindUserByPhone(ctx, request.Phone)
 
 	if err != nil {
-		if errors.Is(err, sql.ErrNoRows) {
+		if errors.Is(err, psqlrepo.ErrNotFound) {
 			s.logger.Info("user not found by phone, can proceed with creation",
 				zap.String("phone", request.Phone))
 		} else {
@@ -228,12 +199,17 @@ func (s *authUserService) CheckUserForLogin(ctx context.Context, request *UserSe
 	userByEmail, err := s.authUserRepo.FindUserByEmail(ctx, request.Email)
 
 	if err != nil {
-		s.logger.Warn("error while finding user by email",
-			zap.String("field", "email"),
-			zap.String("database_error", err.Error()),
-		)
-		return nil, customErrors.NewInternalError(err.Error())
-	}
+        if errors.Is(err, psqlrepo.ErrNotFound) {
+            s.logger.Warn("user not found",
+                zap.String("email", request.Email))
+            return nil, customErrors.NewNotFoundError("User not found")
+        }
+        s.logger.Warn("error while finding user by email",
+            zap.String("field", "email"),
+            zap.String("database_error", err.Error()),
+        )
+        return nil, customErrors.NewInternalError(err.Error())
+    }
 
 	if userByEmail == nil {
 		s.logger.Warn("user has not been registred before",
@@ -360,7 +336,6 @@ func (u *authUserService) Logout(ctx context.Context, refreshToken string) error
 	return nil
 }
 
-
 func (u *authUserService) checkPassword(passwordFromReq string, passwordFromDB string) error {
 
 	if err := bcrypt.CompareHashAndPassword([]byte(passwordFromDB), []byte(passwordFromReq)); err != nil {
@@ -376,25 +351,4 @@ func (u *authUserService) hashPassword(password string) (string, error) {
 
 	return string(hashedPassword), err
 
-}
-
-func isValidEmail(email string) bool {
-
-	if !strings.Contains(email, "@") {
-		return false
-	}
-
-	if !strings.Contains(email, ".") {
-		return false
-	}
-
-	if strings.Contains(email, " ") {
-		return false
-	}
-
-	if len(email) > 255 {
-		return false
-	}
-
-	return true
 }

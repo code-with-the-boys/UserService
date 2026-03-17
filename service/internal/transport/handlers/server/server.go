@@ -11,8 +11,9 @@ type UserServiceServer struct {
 	logger                *zap.Logger
 	authUserService       service.AuthUserService
 	userOperationsService service.UserOperationsService
+	userSettingsService   service.UserSettingsService
 }
 
-func NewUserServiceServer(loggerZ *zap.Logger, authUserService service.AuthUserService, userOperationsService service.UserOperationsService) *UserServiceServer {
-	return &UserServiceServer{logger: loggerZ, authUserService: authUserService, userOperationsService: userOperationsService}
+func NewUserServiceServer(loggerZ *zap.Logger, authUserService service.AuthUserService, userOperationsService service.UserOperationsService, userSettingsService service.UserSettingsService) *UserServiceServer {
+	return &UserServiceServer{logger: loggerZ, authUserService: authUserService, userOperationsService: userOperationsService, userSettingsService: userSettingsService}
 }

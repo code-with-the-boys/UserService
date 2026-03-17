@@ -66,3 +66,11 @@ func NewResourceExhaustedError(message string) *CustomError {
 func NewUnavailableError(message string) *CustomError {
 	return NewCustomError(message, codes.Unavailable)
 }
+
+func NewValidationError(message string) *CustomError {
+	return NewCustomError(message, codes.InvalidArgument)
+}
+
+func NewConflictError(message string) *CustomError {
+	return NewCustomError(message, codes.AlreadyExists)
+}

@@ -41,7 +41,7 @@ func NewInterceptorAuth(
 	}
 }
 
-// AuthRequired возвращает настроенный interceptor
+
 func (i *interceptorAuth) AuthRequired() grpc.UnaryServerInterceptor {
 	return func(
 		ctx context.Context,
