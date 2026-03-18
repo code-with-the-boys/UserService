@@ -1,0 +1,1 @@
+goose postgres "user=postgres password=821100 dbname=UserService sslmode=disable" up

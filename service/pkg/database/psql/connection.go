@@ -13,7 +13,7 @@ var DB *sqlx.DB
 
 func Init() {
 	ctx := context.Background()
-	dsn := "user=postgres password=821100 dbname=shop_system_test host=localhost port=5432 sslmode=disable"
+	dsn := "user=postgres password=821100 dbname=UserService host=localhost port=5432 sslmode=disable"
 
 	db, err := sqlx.ConnectContext(ctx, "postgres", dsn)
 
