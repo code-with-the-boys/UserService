@@ -4,8 +4,6 @@ import (
 	"context"
 	"fmt"
 	"time"
-
-	// customContext "github.com/code-with-the-boys/UserService/internal/context"
 	service "github.com/code-with-the-boys/UserService/internal/services"
 	userServicepb "github.com/mihnpro/UserServiceProtos/gen/go/userServicepb"
 	"go.uber.org/zap"

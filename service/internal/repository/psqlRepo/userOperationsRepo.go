@@ -22,12 +22,15 @@ type userOperationsRepo struct {
 	db     *sqlx.DB
 	logger *zap.Logger
 	userSettingsRepository UserSettingsRepository
+	userProfileRepository UserProfileRepository
 }
 
-func NewUserOperationsRepo(db *sqlx.DB, logger *zap.Logger, userSettingsRepository UserSettingsRepository) UserOperationsRepo {
+func NewUserOperationsRepo(db *sqlx.DB, logger *zap.Logger, userSettingsRepository UserSettingsRepository, userrofileRepository UserProfileRepository) UserOperationsRepo {
 	return &userOperationsRepo{db: db,
 		logger: logger,
-		userSettingsRepository: userSettingsRepository}
+		userSettingsRepository: userSettingsRepository,
+		userProfileRepository: userrofileRepository,
+	}
 }
 
 func (a *userOperationsRepo) FindUserByID(ctx context.Context, id string) (*domain.User, error) {
@@ -55,6 +58,11 @@ func (a *userOperationsRepo) DeleteUserByID(ctx context.Context, id string) erro
 
 	if err := a.userSettingsRepository.DeleteUserSettings(ctx, tx, id); err != nil {
 		a.logger.Error("failed to delete user settings during user deletion", zap.String("id", id), zap.Error(err))
+		return err
+	}
+
+	if err := a.userProfileRepository.DeleteUserProfileInTx(ctx, id, tx); err != nil {
+		a.logger.Error("failed to delete user profile during user deletion", zap.String("id", id), zap.Error(err))
 		return err
 	}
 

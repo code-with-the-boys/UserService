@@ -6,7 +6,6 @@ import (
 	"time"
 
 	customContext "github.com/code-with-the-boys/UserService/internal/context"
-	service "github.com/code-with-the-boys/UserService/internal/services"
 	userServicepb "github.com/mihnpro/UserServiceProtos/gen/go/userServicepb"
 	"go.uber.org/zap"
 	"go.uber.org/zap/zapcore"
@@ -17,8 +16,7 @@ import (
 	"google.golang.org/protobuf/types/known/emptypb"
 )
 
-func (s *UserServiceServer) GetUser(ctx context.Context, req *userServicepb.GetUserRequest) (*userServicepb.GetUserResponse, error) {
-
+func (s *UserServiceServer) CreateUserProfile(ctx context.Context, req *userServicepb.CreateUserProfileRequest) (*userServicepb.UserProfile, error) {
 	userFromContext, err := customContext.GetUser(ctx)
 	if err != nil {
 		s.logger.Info("user not authenticated")
@@ -54,19 +52,64 @@ func (s *UserServiceServer) GetUser(ctx context.Context, req *userServicepb.GetU
 		s.logger.Info("timestamp metadata not found")
 	}
 
-	user, err := s.userOperationsService.GetUserInfo(ctx, req.UserId)
+	profile, err := ProtoToService(req, userFromContext.UserID)
+	if err != nil {
+		return nil, status.Error(codes.InvalidArgument, err.Error())
+	}
 
+	userProfile, err := s.userProfileService.CreateUserProfile(ctx, profile)
+	if err != nil {
+		return nil, err
+	}
+	return ServiceToProto(userProfile), nil
+}
+
+func (s *UserServiceServer) GetUserProfile(ctx context.Context, req *userServicepb.GetUserProfileRequest) (*userServicepb.UserProfile, error) {
+	userFromContext, err := customContext.GetUser(ctx)
+	if err != nil {
+		s.logger.Info("user not authenticated")
+		return nil, status.Error(codes.Unauthenticated, "user not authenticated")
+	}
+
+	if userFromContext.UserID.String() != req.UserId {
+		s.logger.Info("User authenticated", zap.String("User ID from context", userFromContext.UserID.String()), zap.String("User ID from request", req.UserId))
+		return nil, status.Error(codes.Unauthenticated, "user not authenticated")
+	}
+	s.logger.Info("User authenticated", zap.String("User ID from context", userFromContext.UserID.String()), zap.String("User ID from request", req.UserId))
+
+	defer func() {
+		trailer := metadata.Pairs("timestamp", time.Now().Format(time.RFC822))
+		grpc.SetTrailer(ctx, trailer)
+	}()
+
+	md, ok := metadata.FromIncomingContext(ctx)
+
+	if ok {
+		if vals, ok := md["timestamp"]; ok && len(vals) > 0 {
+			s.logger.Info("timestamp metadata:")
+			for i, v := range vals {
+				s.logger.Info("Metadata from client", zapcore.Field{
+					Key:    fmt.Sprintf("timestamp[%d]", i),
+					Type:   zapcore.StringType,
+					String: v,
+				})
+			}
+			s.logger.Info("timestamp metadata end")
+		}
+	} else {
+		s.logger.Info("timestamp metadata not found")
+	}
+
+	user, err := s.userProfileService.GetUserProfile(ctx, req.UserId)
 	if err != nil {
 		return nil, err
 	}
 
-	s.logger.Info("User info got succsefuly from db", zap.String("email", user.Email), zap.String("phone", *user.Phone))
+	return ServiceToProto(user), nil
 
-	return user, nil
 }
 
-func (s *UserServiceServer) UpdateUser(ctx context.Context, req *userServicepb.UpdateUserRequest) (*userServicepb.UpdateUserResponse, error) {
-
+func (s *UserServiceServer) UpdateUserProfile(ctx context.Context, req *userServicepb.UpdateUserProfileRequest) (*userServicepb.UserProfile, error) {
 	userFromContext, err := customContext.GetUser(ctx)
 	if err != nil {
 		s.logger.Info("user not authenticated")
@@ -77,63 +120,20 @@ func (s *UserServiceServer) UpdateUser(ctx context.Context, req *userServicepb.U
 		s.logger.Info("User authenticated", zap.String("User ID from context", userFromContext.UserID.String()), zap.String("User ID from request", req.UserId))
 		return nil, status.Error(codes.Unauthenticated, "user not authenticated")
 	}
-	s.logger.Info("User authenticated", zap.String("User ID from context", userFromContext.UserID.String()), zap.String("User ID from request", req.UserId))
-
 	defer func() {
 		trailer := metadata.Pairs("timestamp", time.Now().Format(time.RFC822))
 		grpc.SetTrailer(ctx, trailer)
 	}()
 
-	md, ok := metadata.FromIncomingContext(ctx)
-
-	if ok {
-		if vals, ok := md["timestamp"]; ok && len(vals) > 0 {
-			s.logger.Info("timestamp metadata:")
-			for i, v := range vals {
-				s.logger.Info("Metadata from client", zapcore.Field{
-					Key:    fmt.Sprintf("timestamp[%d]", i),
-					Type:   zapcore.StringType,
-					String: v,
-				})
-			}
-			s.logger.Info("timestamp metadata end")
-		}
-	} else {
-		s.logger.Info("timestamp metadata not found")
-	}
-
-	userInfo := &service.UserServiceUserInfo{
-		UserID: req.UserId,
-	}
-
-	if req.Email != nil {
-		userInfo.Email = *req.Email
-	}
-
-	if req.Phone != nil {
-		userInfo.Phone = *req.Phone
-	}
-
-	userInfo.IsActive = req.IsActive
-
-	if req.SubscriptionStatus != nil {
-		userInfo.SubscriptionStatus = req.SubscriptionStatus.String()
-	}
-
-	if req.SubscriptionExpires != nil {
-		userInfo.SubscriptionExpires = req.SubscriptionExpires.AsTime()
-	}
-
-	user, err := s.userOperationsService.UpdateUserInfo(ctx, userInfo)
-
+	updatedProfile, err := s.userProfileService.UpdateUserProfile(ctx, req)
 	if err != nil {
 		return nil, err
 	}
 
-	return user, nil
+	return ServiceToProto(updatedProfile), nil
 }
 
-func (s *UserServiceServer) DeleteUser(ctx context.Context, req *userServicepb.DeleteUserRequest) (*emptypb.Empty, error) {
+func (s *UserServiceServer) DeleteUserProfile(ctx context.Context, req *userServicepb.DeleteUserProfileRequest) (*emptypb.Empty, error) {
 	userFromContext, err := customContext.GetUser(ctx)
 	if err != nil {
 		s.logger.Info("user not authenticated")
@@ -144,34 +144,12 @@ func (s *UserServiceServer) DeleteUser(ctx context.Context, req *userServicepb.D
 		s.logger.Info("User authenticated", zap.String("User ID from context", userFromContext.UserID.String()), zap.String("User ID from request", req.UserId))
 		return nil, status.Error(codes.Unauthenticated, "user not authenticated")
 	}
-	s.logger.Info("User authenticated", zap.String("User ID from context", userFromContext.UserID.String()), zap.String("User ID from request", req.UserId))
-
 	defer func() {
 		trailer := metadata.Pairs("timestamp", time.Now().Format(time.RFC822))
 		grpc.SetTrailer(ctx, trailer)
 	}()
 
-	md, ok := metadata.FromIncomingContext(ctx)
-
-	if ok {
-		if vals, ok := md["timestamp"]; ok && len(vals) > 0 {
-			s.logger.Info("timestamp metadata:")
-			for i, v := range vals {
-				s.logger.Info("Metadata from client", zapcore.Field{
-					Key:    fmt.Sprintf("timestamp[%d]", i),
-					Type:   zapcore.StringType,
-					String: v,
-				})
-			}
-			s.logger.Info("timestamp metadata end")
-		}
-	} else {
-		s.logger.Info("timestamp metadata not found")
-	}
-
-	err = s.userOperationsService.DeleteUserInfo(ctx, req.UserId)
-
-	if err != nil {
+	if err := s.userProfileService.DeleteUserProfile(ctx, req.UserId); err != nil {
 		return nil, err
 	}
 

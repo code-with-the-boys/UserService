@@ -12,8 +12,9 @@ type UserServiceServer struct {
 	authUserService       service.AuthUserService
 	userOperationsService service.UserOperationsService
 	userSettingsService   service.UserSettingsService
+	userProfileService    service.UserProfileService
 }
 
-func NewUserServiceServer(loggerZ *zap.Logger, authUserService service.AuthUserService, userOperationsService service.UserOperationsService, userSettingsService service.UserSettingsService) *UserServiceServer {
-	return &UserServiceServer{logger: loggerZ, authUserService: authUserService, userOperationsService: userOperationsService, userSettingsService: userSettingsService}
+func NewUserServiceServer(loggerZ *zap.Logger, authUserService service.AuthUserService, userOperationsService service.UserOperationsService, userSettingsService service.UserSettingsService, userProfileService service.UserProfileService) *UserServiceServer {
+	return &UserServiceServer{logger: loggerZ, authUserService: authUserService, userOperationsService: userOperationsService, userSettingsService: userSettingsService, userProfileService: userProfileService}
 }

@@ -50,13 +50,17 @@ func main() {
 	authUserRepoRedis := redisRepo.NewRefreshTokenRepo(redisClient, logger)
 	jwtService := auth.NewJwtService()
 
+	userProfileRepo := psqlrepo.NewUserProfileRepository(db, logger)
+
 	authUserService := service.NewAuthUserService(logger, authUserRepo, authUserRepoRedis, jwtService)
-	userOperationsRepo := psqlrepo.NewUserOperationsRepo(db, logger, userSettingsRepo)
+	userOperationsRepo := psqlrepo.NewUserOperationsRepo(db, logger, userSettingsRepo, userProfileRepo)
 	userOperationsService := service.NewUserOperationsService(logger, jwtService, userOperationsRepo, authUserRepoRedis, authUserRepo)
 
 	userSettingsService := service.NewUserSettingsService(userSettingsRepo, logger)
 
-	grpcServer := server.NewUserServiceServer(logger, authUserService, userOperationsService, userSettingsService)
+	userProfileService := service.NewUserProfileService(userProfileRepo, logger)
+
+	grpcServer := server.NewUserServiceServer(logger, authUserService, userOperationsService, userSettingsService, userProfileService)
 
 	lis, err := net.Listen("tcp", ":"+port)
 	if err != nil {
