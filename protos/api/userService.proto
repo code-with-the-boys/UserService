@@ -51,6 +51,9 @@ service UserService {
     
     // Обновление настроек пользователя
     rpc UpdateUserSettings(UpdateUserSettingsRequest) returns (UserSettings);
+
+    // Получение текущего id пользователя
+    rpc GetCurrentUserID(google.protobuf.Empty) returns (CurrentUserIDResponse);
 }
 
 // Enums
@@ -98,6 +101,12 @@ enum PrivacyLevel {
     PRIVACY_LEVEL_PRIVATE = 2;     // Приватный профиль
     PRIVACY_LEVEL_FRIENDS = 3;     // Доступно только друзьям
     PRIVACY_LEVEL_ONLY_ME = 4;     // Только я
+}
+
+
+// Текущий id пользока
+message CurrentUserIDResponse {
+    string user_id = 1;
 }
 
 // Auth messages
