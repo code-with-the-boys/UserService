@@ -31,6 +31,6 @@ RUN chmod +x /app/entrypoint.sh
 
 WORKDIR /app
 
-EXPOSE 8080
+EXPOSE 8080 9090
 
 ENTRYPOINT ["/app/entrypoint.sh"]

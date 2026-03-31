@@ -58,8 +58,12 @@ services:
       redis:
         condition: service_healthy
     ports:
-      - "${APP_PORT:-8080}:8080"
+      - "${APP_HTTP_PORT:-8080}:8080"
+      - "${APP_GRPC_PORT:-9090}:9090"
     environment:
+      HTTP_ADDR: ":8080"
+      GRPC_ADDR: ":9090"
+      TRAIN_GRPC_ADDR: "${TRAIN_GRPC_ADDR:-host.docker.internal:50051}"
       POSTGRES_HOST: postgres
       POSTGRES_PORT: 5432
       POSTGRES_USER: ${POSTGRES_USER:-fitness_user}
