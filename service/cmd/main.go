@@ -94,8 +94,6 @@ func main() {
 	reflection.Register(grpcSrv)
 
 	ctx := context.Background()
-	ctx, cancel := context.WithCancel(ctx)
-	defer cancel()
 
 	mux := runtime.NewServeMux()
 
