@@ -8,10 +8,12 @@ RUN apk add --no-cache git ca-certificates && \
 
 ENV PATH="/go/bin:${PATH}"
 
-COPY go.mod go.sum ./
+# go.mod replace points to ../protos — must exist before go mod download (path = /protos when WORKDIR is /app)
+COPY protos /protos
+COPY service/go.mod service/go.sum ./
 RUN go mod download
 
-COPY . .
+COPY service/ .
 
 RUN CGO_ENABLED=0 GOOS=linux go build -o main ./cmd/main.go
 

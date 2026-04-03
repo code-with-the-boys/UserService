@@ -47,8 +47,8 @@ services:
 
   app:
     build:
-      context: ./service
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: service/Dockerfile
     container_name: fitness_app
     env_file:
       - .env
