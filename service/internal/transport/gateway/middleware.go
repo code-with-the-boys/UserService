@@ -56,6 +56,9 @@ func JWTHTTPMiddleware(logger *zap.Logger, jwt auth.JwtAuth, next http.Handler) 
 
 // IsPublicHTTPRoute matches grpc-gateway paths that skip JWT on HTTP edge.
 func IsPublicHTTPRoute(method, path string) bool {
+	if path == "/metrics" {
+		return true
+	}
 	if method == http.MethodGet && path == "/api/v1/train/health" {
 		return true
 	}

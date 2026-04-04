@@ -24,6 +24,7 @@ import (
 	"github.com/joho/godotenv"
 	trainpb "github.com/mihnpro/UserServiceProtos/gen/go/train_service_api/v1"
 	userServicepb "github.com/mihnpro/UserServiceProtos/gen/go/userServicepb"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"go.uber.org/zap"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -87,7 +88,11 @@ func main() {
 	authInterceptor := interceptors.NewInterceptorAuth(logger, skipMethods, jwtService)
 
 	grpcSrv := grpc.NewServer(
-		grpc.UnaryInterceptor(authInterceptor.AuthRequired()),
+		grpc.ChainUnaryInterceptor(
+			interceptors.LoggerInterceptor(logger),
+			interceptors.PrometheusInterceptor(),
+			authInterceptor.AuthRequired(),
+		),
 	)
 
 	userServicepb.RegisterUserServiceServer(grpcSrv, grpcServer)
@@ -112,7 +117,11 @@ func main() {
 		logger.Fatal("register train gateway", zap.Error(err))
 	}
 
-	httpHandler := gw.JWTHTTPMiddleware(logger, jwtService, mux)
+	mainMux := http.NewServeMux()
+	mainMux.Handle("/", mux)
+	mainMux.Handle("/metrics", promhttp.Handler())
+
+	httpHandler := gw.JWTHTTPMiddleware(logger, jwtService, mainMux)
 	httpSrv := &http.Server{
 		Addr:              httpAddr,
 		Handler:           httpHandler,
