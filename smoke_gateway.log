@@ -1,0 +1,845 @@
+
+>>>>>>>> Session start 2026-04-03T17:07:20+0300 PID=79329 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-03T17:07:20+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-03T17:07:20+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775225240-1-3177@example.test","password":"secret123","phone":"72927772641"}
+HTTP 200
+{"userId":"f0098875-cb38-4054-848c-efeeab95dc5e","message":"User created"}
+
+======== 2026-04-03T17:07:20+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775225240-1-3177@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjAwOTg4NzUtY2IzOC00MDU0LTg0OGMtZWZlZWFiOTVkYzVlIiwiZW1haWwiOiJzbW9rZS0xNzc1MjI1MjQwLTEtMzE3N0BleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyMjYxNDAsImlhdCI6MTc3NTIyNTI0MH0.F47yhhp5rs6oPrm25rRnmq-jZXvfmWgB1ALEyBH9BzU","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZjAwOTg4NzUtY2IzOC00MDU0LTg0OGMtZWZlZWFiOTVkYzVlIiwiZW1haWwiOiJzbW9rZS0xNzc1MjI1MjQwLTEtMzE3N0BleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTgzMDA0MCwiaWF0IjoxNzc1MjI1MjQwfQ.Xec3TkxkvMoDCAhKPwfCoyPQQCS1nmMmxhKumc4vOiM","userId":"f0098875-cb38-4054-848c-efeeab95dc5e","email":"smoke-1775225240-1-3177@example.test"}
+
+======== 2026-04-03T17:07:20+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"f0098875-cb38-4054-848c-efeeab95dc5e"}
+
+======== 2026-04-03T17:07:20+0300 GET http://127.0.0.1:8080/api/v1/users/f0098875-cb38-4054-848c-efeeab95dc5e ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"f0098875-cb38-4054-848c-efeeab95dc5e","email":"smoke-1775225240-1-3177@example.test","phone":"72927772641","isActive":true,"subscriptionStatus":"SUBSCRIPTION_STATUS_NONE","subscriptionExpires":null,"createdAt":"2026-04-03T14:07:20.486253Z","updatedAt":"2026-04-03T14:07:20.486253Z"}
+
+======== 2026-04-03T17:07:21+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 500
+{"code":13,"message":"unexpected error","details":[]}
+
+======== 2026-04-03T17:07:21+0300 SCRIPT FAIL: train plans HTTP 500: {"code":13,"message":"unexpected error","details":[]} ========
+
+>>>>>>>> Session start 2026-04-03T21:13:23+0300 PID=82980 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-03T21:13:24+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-03T21:13:24+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775240004-1-12934@example.test","password":"secret123","phone":"78534112291"}
+HTTP 200
+{"userId":"92659c2a-0591-44c6-b219-1e84b2a7fca1","message":"User created"}
+
+======== 2026-04-03T21:13:24+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775240004-1-12934@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTI2NTljMmEtMDU5MS00NGM2LWIyMTktMWU4NGIyYTdmY2ExIiwiZW1haWwiOiJzbW9rZS0xNzc1MjQwMDA0LTEtMTI5MzRAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjQwOTA0LCJpYXQiOjE3NzUyNDAwMDR9.E84ElofgcDJNtYr_4ZIqfLJep6-d0hzrU2CLzxTVI8c","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTI2NTljMmEtMDU5MS00NGM2LWIyMTktMWU4NGIyYTdmY2ExIiwiZW1haWwiOiJzbW9rZS0xNzc1MjQwMDA0LTEtMTI5MzRAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4NDQ4MDQsImlhdCI6MTc3NTI0MDAwNH0.Ngu8mRyKygPUIaJ0gCRtSAzpSe-Cm7h_UubM3pPUN1w","userId":"92659c2a-0591-44c6-b219-1e84b2a7fca1","email":"smoke-1775240004-1-12934@example.test"}
+
+======== 2026-04-03T21:13:24+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"92659c2a-0591-44c6-b219-1e84b2a7fca1"}
+
+======== 2026-04-03T21:13:24+0300 GET http://127.0.0.1:8080/api/v1/users/92659c2a-0591-44c6-b219-1e84b2a7fca1 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"92659c2a-0591-44c6-b219-1e84b2a7fca1","email":"smoke-1775240004-1-12934@example.test","phone":"78534112291","isActive":true,"subscriptionStatus":"SUBSCRIPTION_STATUS_NONE","subscriptionExpires":null,"createdAt":"2026-04-03T18:13:24.159564Z","updatedAt":"2026-04-03T18:13:24.159564Z"}
+
+======== 2026-04-03T21:13:25+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 500
+{"code":13,"message":"unexpected error","details":[]}
+
+======== 2026-04-03T21:13:25+0300 SCRIPT FAIL: train plans HTTP 500: {"code":13,"message":"unexpected error","details":[]} ========
+
+>>>>>>>> Session start 2026-04-03T21:25:50+0300 PID=85910 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-03T21:25:50+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-03T21:25:50+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775240750-1-28635@example.test","password":"secret123","phone":"75415431260"}
+HTTP 200
+{"userId":"626cdc35-5d7f-4fb8-9b8c-35969594a8b9","message":"User created"}
+
+======== 2026-04-03T21:25:50+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775240750-1-28635@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI2Y2RjMzUtNWQ3Zi00ZmI4LTliOGMtMzU5Njk1OTRhOGI5IiwiZW1haWwiOiJzbW9rZS0xNzc1MjQwNzUwLTEtMjg2MzVAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjQxNjUwLCJpYXQiOjE3NzUyNDA3NTB9.qJIbxj2ZoBwWAw69aQVKrnE5lHIDFAVr0MM0rsuBnuk","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjI2Y2RjMzUtNWQ3Zi00ZmI4LTliOGMtMzU5Njk1OTRhOGI5IiwiZW1haWwiOiJzbW9rZS0xNzc1MjQwNzUwLTEtMjg2MzVAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4NDU1NTAsImlhdCI6MTc3NTI0MDc1MH0.0ewwR39mjPBDNXYLd1InMZ4_QHxa0gp7qehN0uOiNaE","userId":"626cdc35-5d7f-4fb8-9b8c-35969594a8b9","email":"smoke-1775240750-1-28635@example.test"}
+
+======== 2026-04-03T21:25:50+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"626cdc35-5d7f-4fb8-9b8c-35969594a8b9"}
+
+======== 2026-04-03T21:25:50+0300 GET http://127.0.0.1:8080/api/v1/users/626cdc35-5d7f-4fb8-9b8c-35969594a8b9 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"626cdc35-5d7f-4fb8-9b8c-35969594a8b9","email":"smoke-1775240750-1-28635@example.test","phone":"75415431260","isActive":true,"subscriptionStatus":"SUBSCRIPTION_STATUS_NONE","subscriptionExpires":null,"createdAt":"2026-04-03T18:25:50.448311Z","updatedAt":"2026-04-03T18:25:50.448311Z"}
+
+======== 2026-04-03T21:25:51+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 500
+{"code":13,"message":"unexpected error","details":[]}
+
+======== 2026-04-03T21:25:51+0300 SCRIPT FAIL: train plans HTTP 500: {"code":13,"message":"unexpected error","details":[]} ========
+
+>>>>>>>> Session start 2026-04-03T21:30:30+0300 PID=87009 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-03T21:30:30+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-03T21:30:30+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775241030-1-16147@example.test","password":"secret123","phone":"78919380891"}
+HTTP 200
+{"userId":"03496600-1897-4308-a8f4-72139f2d42b2","message":"User created"}
+
+======== 2026-04-03T21:30:30+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775241030-1-16147@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDM0OTY2MDAtMTg5Ny00MzA4LWE4ZjQtNzIxMzlmMmQ0MmIyIiwiZW1haWwiOiJzbW9rZS0xNzc1MjQxMDMwLTEtMTYxNDdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjQxOTMwLCJpYXQiOjE3NzUyNDEwMzB9.U4IUKbCTUH9Zl0vPqUI7h1Y5XJ1V7JF_9HXwfKAFDTs","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDM0OTY2MDAtMTg5Ny00MzA4LWE4ZjQtNzIxMzlmMmQ0MmIyIiwiZW1haWwiOiJzbW9rZS0xNzc1MjQxMDMwLTEtMTYxNDdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4NDU4MzAsImlhdCI6MTc3NTI0MTAzMH0.hCOhzabtxSUfcOaqF7gF2RYALnUIUzAWE9rQDq6lqtU","userId":"03496600-1897-4308-a8f4-72139f2d42b2","email":"smoke-1775241030-1-16147@example.test"}
+
+======== 2026-04-03T21:30:30+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"03496600-1897-4308-a8f4-72139f2d42b2"}
+
+======== 2026-04-03T21:30:30+0300 GET http://127.0.0.1:8080/api/v1/users/03496600-1897-4308-a8f4-72139f2d42b2 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"03496600-1897-4308-a8f4-72139f2d42b2","email":"smoke-1775241030-1-16147@example.test","phone":"78919380891","isActive":true,"subscriptionStatus":"SUBSCRIPTION_STATUS_NONE","subscriptionExpires":null,"createdAt":"2026-04-03T18:30:30.231334Z","updatedAt":"2026-04-03T18:30:30.231334Z"}
+
+======== 2026-04-03T21:30:31+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 500
+{"code":13,"message":"unexpected error","details":[]}
+
+======== 2026-04-03T21:30:31+0300 SCRIPT FAIL: train plans HTTP 500: {"code":13,"message":"unexpected error","details":[]} ========
+
+>>>>>>>> Session start 2026-04-03T21:32:26+0300 PID=88017 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-03T21:32:26+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-03T21:32:27+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775241146-1-2500@example.test","password":"secret123","phone":"79233527368"}
+HTTP 200
+{"userId":"954b95fe-57d4-4fec-82de-2908c55bb3b8","message":"User created"}
+
+======== 2026-04-03T21:32:27+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775241146-1-2500@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTU0Yjk1ZmUtNTdkNC00ZmVjLTgyZGUtMjkwOGM1NWJiM2I4IiwiZW1haWwiOiJzbW9rZS0xNzc1MjQxMTQ2LTEtMjUwMEBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyNDIwNDcsImlhdCI6MTc3NTI0MTE0N30.HOmMCnnbOOiJpGIDKaBmrYy21OKq2830JA-6DVY6PYo","refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOTU0Yjk1ZmUtNTdkNC00ZmVjLTgyZGUtMjkwOGM1NWJiM2I4IiwiZW1haWwiOiJzbW9rZS0xNzc1MjQxMTQ2LTEtMjUwMEBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTg0NTk0NywiaWF0IjoxNzc1MjQxMTQ3fQ.Ug32VDTVJpyExCBtdsIm_qBkWrl8GDG_RXVYj18-9hw","userId":"954b95fe-57d4-4fec-82de-2908c55bb3b8","email":"smoke-1775241146-1-2500@example.test"}
+
+======== 2026-04-03T21:32:27+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"954b95fe-57d4-4fec-82de-2908c55bb3b8"}
+
+======== 2026-04-03T21:32:27+0300 GET http://127.0.0.1:8080/api/v1/users/954b95fe-57d4-4fec-82de-2908c55bb3b8 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"954b95fe-57d4-4fec-82de-2908c55bb3b8","email":"smoke-1775241146-1-2500@example.test","phone":"79233527368","isActive":true,"subscriptionStatus":"SUBSCRIPTION_STATUS_NONE","subscriptionExpires":null,"createdAt":"2026-04-03T18:32:27.044763Z","updatedAt":"2026-04-03T18:32:27.044763Z"}
+
+======== 2026-04-03T21:32:27+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-03T21:32:27+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:03:59+0300 PID=83499 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:03:59+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:03:59+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775289839-1-1083@example.test","password":"secret123","phone":"73262716259"}
+HTTP 200
+{"userId":"78f6a671-2ea3-43a2-b768-90aaf5e3b2dd", "message":"User created"}
+
+======== 2026-04-04T11:03:59+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775289839-1-1083@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzhmNmE2NzEtMmVhMy00M2EyLWI3NjgtOTBhYWY1ZTNiMmRkIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjg5ODM5LTEtMTA4M0BleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyOTA3MzksImlhdCI6MTc3NTI4OTgzOX0.vUJ_iiJL1rkpbrLQaFMMU69nd1m9zdpmm1-ku3fIEwc", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzhmNmE2NzEtMmVhMy00M2EyLWI3NjgtOTBhYWY1ZTNiMmRkIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjg5ODM5LTEtMTA4M0BleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTg5NDYzOSwiaWF0IjoxNzc1Mjg5ODM5fQ.4bK2OxuAcoEwQ-uactM1yRMGsiTEnQYxgRn4-VmTGFU", "userId":"78f6a671-2ea3-43a2-b768-90aaf5e3b2dd", "email":"smoke-1775289839-1-1083@example.test"}
+
+======== 2026-04-04T11:03:59+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"78f6a671-2ea3-43a2-b768-90aaf5e3b2dd"}
+
+======== 2026-04-04T11:03:59+0300 GET http://127.0.0.1:8080/api/v1/users/78f6a671-2ea3-43a2-b768-90aaf5e3b2dd ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"78f6a671-2ea3-43a2-b768-90aaf5e3b2dd", "email":"smoke-1775289839-1-1083@example.test", "phone":"73262716259", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:03:59.600696Z", "updatedAt":"2026-04-04T08:03:59.600696Z"}
+
+======== 2026-04-04T11:03:59+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:03:59+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:04:42+0300 PID=83829 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:04:42+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:04:43+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775289882-1-23083@example.test","password":"secret123","phone":"73181049390"}
+HTTP 200
+{"userId":"7cf20fd3-1309-4938-b740-0909b554267b", "message":"User created"}
+
+======== 2026-04-04T11:04:43+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775289882-1-23083@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiN2NmMjBmZDMtMTMwOS00OTM4LWI3NDAtMDkwOWI1NTQyNjdiIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjg5ODgyLTEtMjMwODNAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjkwNzgzLCJpYXQiOjE3NzUyODk4ODN9.nPBojw57UNn0QJvWvnb_6WGi56SRWYTfjhBS0CgJ190", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiN2NmMjBmZDMtMTMwOS00OTM4LWI3NDAtMDkwOWI1NTQyNjdiIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjg5ODgyLTEtMjMwODNAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4OTQ2ODMsImlhdCI6MTc3NTI4OTg4M30.XFxz82Fmn6KP5qs_8LIDAIjWT-raytd8K9-go5zmH4k", "userId":"7cf20fd3-1309-4938-b740-0909b554267b", "email":"smoke-1775289882-1-23083@example.test"}
+
+======== 2026-04-04T11:04:43+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"7cf20fd3-1309-4938-b740-0909b554267b"}
+
+======== 2026-04-04T11:04:43+0300 GET http://127.0.0.1:8080/api/v1/users/7cf20fd3-1309-4938-b740-0909b554267b ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"7cf20fd3-1309-4938-b740-0909b554267b", "email":"smoke-1775289882-1-23083@example.test", "phone":"73181049390", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:04:43.022010Z", "updatedAt":"2026-04-04T08:04:43.022010Z"}
+
+======== 2026-04-04T11:04:43+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:04:43+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:24:56+0300 PID=87181 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:24:56+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:24:56+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775291096-1-294@example.test","password":"secret123","phone":"70671110244"}
+HTTP 200
+{"userId":"fb2c148b-31bb-431c-a2d9-48732c53a83e", "message":"User created"}
+
+======== 2026-04-04T11:24:56+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775291096-1-294@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmIyYzE0OGItMzFiYi00MzFjLWEyZDktNDg3MzJjNTNhODNlIiwiZW1haWwiOiJzbW9rZS0xNzc1MjkxMDk2LTEtMjk0QGV4YW1wbGUudGVzdCIsInRva2VuX3R5cGUiOiJhY2Nlc3MiLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6ImFjY2VzcyIsImV4cCI6MTc3NTI5MTk5NiwiaWF0IjoxNzc1MjkxMDk2fQ.wbZxbydzXrB5SzBD5GcUjawPKEdeHJWNu1MHGSL-kiQ", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmIyYzE0OGItMzFiYi00MzFjLWEyZDktNDg3MzJjNTNhODNlIiwiZW1haWwiOiJzbW9rZS0xNzc1MjkxMDk2LTEtMjk0QGV4YW1wbGUudGVzdCIsInRva2VuX3R5cGUiOiJyZWZyZXNoIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJyZWZyZXNoIiwiZXhwIjoxNzc1ODk1ODk2LCJpYXQiOjE3NzUyOTEwOTZ9.ARo4wZDfvKEuY8i8ik3ME01UyU-tN93HdbJ_0AUvNEQ", "userId":"fb2c148b-31bb-431c-a2d9-48732c53a83e", "email":"smoke-1775291096-1-294@example.test"}
+
+======== 2026-04-04T11:24:56+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"fb2c148b-31bb-431c-a2d9-48732c53a83e"}
+
+======== 2026-04-04T11:24:56+0300 GET http://127.0.0.1:8080/api/v1/users/fb2c148b-31bb-431c-a2d9-48732c53a83e ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"fb2c148b-31bb-431c-a2d9-48732c53a83e", "email":"smoke-1775291096-1-294@example.test", "phone":"70671110244", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:24:56.283686Z", "updatedAt":"2026-04-04T08:24:56.283686Z"}
+
+======== 2026-04-04T11:24:56+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:24:56+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:31:26+0300 PID=88221 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:31:26+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:31:27+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775291486-1-27360@example.test","password":"secret123","phone":"73193936711"}
+HTTP 200
+{"userId":"9e51b350-e776-49fd-bb94-9ccd35feed65", "message":"User created"}
+
+======== 2026-04-04T11:31:27+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775291486-1-27360@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOWU1MWIzNTAtZTc3Ni00OWZkLWJiOTQtOWNjZDM1ZmVlZDY1IiwiZW1haWwiOiJzbW9rZS0xNzc1MjkxNDg2LTEtMjczNjBAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjkyMzg3LCJpYXQiOjE3NzUyOTE0ODd9.vvBljCEJWc4UO9w2XQN6-P-_m61MvJlJcXmmJPPMlcE", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiOWU1MWIzNTAtZTc3Ni00OWZkLWJiOTQtOWNjZDM1ZmVlZDY1IiwiZW1haWwiOiJzbW9rZS0xNzc1MjkxNDg2LTEtMjczNjBAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4OTYyODcsImlhdCI6MTc3NTI5MTQ4N30.YuJcWOnBMQ8R0Cw_LXGgXIY2hjOLE1FM8NQJHZ_sLXE", "userId":"9e51b350-e776-49fd-bb94-9ccd35feed65", "email":"smoke-1775291486-1-27360@example.test"}
+
+======== 2026-04-04T11:31:27+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"9e51b350-e776-49fd-bb94-9ccd35feed65"}
+
+======== 2026-04-04T11:31:27+0300 GET http://127.0.0.1:8080/api/v1/users/9e51b350-e776-49fd-bb94-9ccd35feed65 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"9e51b350-e776-49fd-bb94-9ccd35feed65", "email":"smoke-1775291486-1-27360@example.test", "phone":"73193936711", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:31:26.999154Z", "updatedAt":"2026-04-04T08:31:26.999154Z"}
+
+======== 2026-04-04T11:31:27+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:31:27+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:32:21+0300 PID=88557 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:32:21+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:32:21+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775291541-1-24770@example.test","password":"secret123","phone":"78196715410"}
+HTTP 200
+{"userId":"afb9036e-4c9e-470f-b4e1-5430baf672d2", "message":"User created"}
+
+======== 2026-04-04T11:32:21+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775291541-1-24770@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWZiOTAzNmUtNGM5ZS00NzBmLWI0ZTEtNTQzMGJhZjY3MmQyIiwiZW1haWwiOiJzbW9rZS0xNzc1MjkxNTQxLTEtMjQ3NzBAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjkyNDQxLCJpYXQiOjE3NzUyOTE1NDF9.ElLEzhSSeMQY11Cil5LMcHv6ykoSBbuG1CNyfPM8Lk4", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYWZiOTAzNmUtNGM5ZS00NzBmLWI0ZTEtNTQzMGJhZjY3MmQyIiwiZW1haWwiOiJzbW9rZS0xNzc1MjkxNTQxLTEtMjQ3NzBAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4OTYzNDEsImlhdCI6MTc3NTI5MTU0MX0.WveUaeTR5fhDqYlxm2c8GX7Fpd4JuyJexYXigWIrsZ0", "userId":"afb9036e-4c9e-470f-b4e1-5430baf672d2", "email":"smoke-1775291541-1-24770@example.test"}
+
+======== 2026-04-04T11:32:21+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"afb9036e-4c9e-470f-b4e1-5430baf672d2"}
+
+======== 2026-04-04T11:32:21+0300 GET http://127.0.0.1:8080/api/v1/users/afb9036e-4c9e-470f-b4e1-5430baf672d2 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"afb9036e-4c9e-470f-b4e1-5430baf672d2", "email":"smoke-1775291541-1-24770@example.test", "phone":"78196715410", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:32:21.638201Z", "updatedAt":"2026-04-04T08:32:21.638201Z"}
+
+======== 2026-04-04T11:32:21+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:32:21+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:54:03+0300 PID=92705 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:54:03+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:54:03+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775292843-1-10371@example.test","password":"secret123","phone":"77029757540"}
+HTTP 200
+{"userId":"6b179e0d-219f-4e3d-8004-11e9f6c1a3a0", "message":"User created"}
+
+======== 2026-04-04T11:54:03+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775292843-1-10371@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNmIxNzllMGQtMjE5Zi00ZTNkLTgwMDQtMTFlOWY2YzFhM2EwIiwiZW1haWwiOiJzbW9rZS0xNzc1MjkyODQzLTEtMTAzNzFAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjkzNzQzLCJpYXQiOjE3NzUyOTI4NDN9.ra1aBaUrkuLG0iPDG7Pisu6g6a0xYdm2tuaiEzF_sg0", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNmIxNzllMGQtMjE5Zi00ZTNkLTgwMDQtMTFlOWY2YzFhM2EwIiwiZW1haWwiOiJzbW9rZS0xNzc1MjkyODQzLTEtMTAzNzFAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4OTc2NDMsImlhdCI6MTc3NTI5Mjg0M30.g4NfNlvmHzqF_wHtBxtUvBUif0JQBu7LQSp2IaUXVwg", "userId":"6b179e0d-219f-4e3d-8004-11e9f6c1a3a0", "email":"smoke-1775292843-1-10371@example.test"}
+
+======== 2026-04-04T11:54:03+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"6b179e0d-219f-4e3d-8004-11e9f6c1a3a0"}
+
+======== 2026-04-04T11:54:03+0300 GET http://127.0.0.1:8080/api/v1/users/6b179e0d-219f-4e3d-8004-11e9f6c1a3a0 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"6b179e0d-219f-4e3d-8004-11e9f6c1a3a0", "email":"smoke-1775292843-1-10371@example.test", "phone":"77029757540", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:54:03.675148Z", "updatedAt":"2026-04-04T08:54:03.675148Z"}
+
+======== 2026-04-04T11:54:03+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:54:03+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T11:56:00+0300 PID=94301 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T11:56:00+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T11:56:00+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775292960-1-18550@example.test","password":"secret123","phone":"71748748773"}
+HTTP 200
+{"userId":"ff1f539d-ad3a-47c3-bde2-4580c547fbc5", "message":"User created"}
+
+======== 2026-04-04T11:56:00+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775292960-1-18550@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmYxZjUzOWQtYWQzYS00N2MzLWJkZTItNDU4MGM1NDdmYmM1IiwiZW1haWwiOiJzbW9rZS0xNzc1MjkyOTYwLTEtMTg1NTBAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1MjkzODYwLCJpYXQiOjE3NzUyOTI5NjB9.QAwo9c4GhhkeX8j571jSYemyldo0ev08GQf5aJX_mL0", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZmYxZjUzOWQtYWQzYS00N2MzLWJkZTItNDU4MGM1NDdmYmM1IiwiZW1haWwiOiJzbW9rZS0xNzc1MjkyOTYwLTEtMTg1NTBAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU4OTc3NjAsImlhdCI6MTc3NTI5Mjk2MH0.ImhE2taZ4i6lRn6KHPlDjrH4iFlbRP75Dj1Sx-EA57M", "userId":"ff1f539d-ad3a-47c3-bde2-4580c547fbc5", "email":"smoke-1775292960-1-18550@example.test"}
+
+======== 2026-04-04T11:56:00+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"ff1f539d-ad3a-47c3-bde2-4580c547fbc5"}
+
+======== 2026-04-04T11:56:00+0300 GET http://127.0.0.1:8080/api/v1/users/ff1f539d-ad3a-47c3-bde2-4580c547fbc5 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"ff1f539d-ad3a-47c3-bde2-4580c547fbc5", "email":"smoke-1775292960-1-18550@example.test", "phone":"71748748773", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T08:56:00.437092Z", "updatedAt":"2026-04-04T08:56:00.437092Z"}
+
+======== 2026-04-04T11:56:00+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T11:56:00+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:34:53+0300 PID=3105 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:34:53+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:34:53+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775295293-1-1317@example.test","password":"secret123","phone":"74920965126"}
+HTTP 200
+{"userId":"08e0978f-2d4d-4c4f-b1b0-0ff48db4227c", "message":"User created"}
+
+======== 2026-04-04T12:34:53+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775295293-1-1317@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDhlMDk3OGYtMmQ0ZC00YzRmLWIxYjAtMGZmNDhkYjQyMjdjIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk1MjkzLTEtMTMxN0BleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyOTYxOTMsImlhdCI6MTc3NTI5NTI5M30.6W5j-ZxcyvpjtCQo9bZhBIcc5mh0ijWmeJvLDldYmCY", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMDhlMDk3OGYtMmQ0ZC00YzRmLWIxYjAtMGZmNDhkYjQyMjdjIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk1MjkzLTEtMTMxN0BleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTkwMDA5MywiaWF0IjoxNzc1Mjk1MjkzfQ.TU5bO6hrUxghDKtM6FaCKVoDGGRMJGHAtPMz-h9yNv4", "userId":"08e0978f-2d4d-4c4f-b1b0-0ff48db4227c", "email":"smoke-1775295293-1-1317@example.test"}
+
+======== 2026-04-04T12:34:53+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"08e0978f-2d4d-4c4f-b1b0-0ff48db4227c"}
+
+======== 2026-04-04T12:34:53+0300 GET http://127.0.0.1:8080/api/v1/users/08e0978f-2d4d-4c4f-b1b0-0ff48db4227c ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"08e0978f-2d4d-4c4f-b1b0-0ff48db4227c", "email":"smoke-1775295293-1-1317@example.test", "phone":"74920965126", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:34:53.420566Z", "updatedAt":"2026-04-04T09:34:53.420566Z"}
+
+======== 2026-04-04T12:34:53+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:34:53+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:35:02+0300 PID=3401 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:35:02+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:35:02+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775295302-1-25192@example.test","password":"secret123","phone":"76177771598"}
+HTTP 200
+{"userId":"bb63c022-61a1-4d73-97a6-29bf2fe1a845", "message":"User created"}
+
+======== 2026-04-04T12:35:02+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775295302-1-25192@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYmI2M2MwMjItNjFhMS00ZDczLTk3YTYtMjliZjJmZTFhODQ1IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk1MzAyLTEtMjUxOTJAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk2MjAyLCJpYXQiOjE3NzUyOTUzMDJ9.SqLPiCSC5S-vpeaGoF1AxeWSDU_l3dqFrkm97vQTG0g", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYmI2M2MwMjItNjFhMS00ZDczLTk3YTYtMjliZjJmZTFhODQ1IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk1MzAyLTEtMjUxOTJAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDAxMDIsImlhdCI6MTc3NTI5NTMwMn0.Dgcj__jCFD0kSRyFuDEUjkJ0J6v1nItpfd-ua95hVjE", "userId":"bb63c022-61a1-4d73-97a6-29bf2fe1a845", "email":"smoke-1775295302-1-25192@example.test"}
+
+======== 2026-04-04T12:35:02+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"bb63c022-61a1-4d73-97a6-29bf2fe1a845"}
+
+======== 2026-04-04T12:35:02+0300 GET http://127.0.0.1:8080/api/v1/users/bb63c022-61a1-4d73-97a6-29bf2fe1a845 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"bb63c022-61a1-4d73-97a6-29bf2fe1a845", "email":"smoke-1775295302-1-25192@example.test", "phone":"76177771598", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:35:02.560863Z", "updatedAt":"2026-04-04T09:35:02.560863Z"}
+
+======== 2026-04-04T12:35:02+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:35:02+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:35:24+0300 PID=3784 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:35:24+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 000
+
+
+======== 2026-04-04T12:35:24+0300 SCRIPT FAIL: train health HTTP 000:  ========
+
+>>>>>>>> Session start 2026-04-04T12:40:47+0300 PID=5918 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:40:47+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:40:48+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775295647-1-14697@example.test","password":"secret123","phone":"76545925138"}
+HTTP 200
+{"userId":"a12be997-d128-45da-bea0-1f0e0f761231", "message":"User created"}
+
+======== 2026-04-04T12:40:48+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775295647-1-14697@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTEyYmU5OTctZDEyOC00NWRhLWJlYTAtMWYwZTBmNzYxMjMxIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk1NjQ3LTEtMTQ2OTdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk2NTQ4LCJpYXQiOjE3NzUyOTU2NDh9.XmMk-exoC3pHYGMKXZy-xKpIP84v3KF-oan3bWaLwxE", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYTEyYmU5OTctZDEyOC00NWRhLWJlYTAtMWYwZTBmNzYxMjMxIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk1NjQ3LTEtMTQ2OTdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDA0NDgsImlhdCI6MTc3NTI5NTY0OH0._vtMuaArpufS02-VJoZsDXbNXKsoxpVsZDAzIOymh5A", "userId":"a12be997-d128-45da-bea0-1f0e0f761231", "email":"smoke-1775295647-1-14697@example.test"}
+
+======== 2026-04-04T12:40:48+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"a12be997-d128-45da-bea0-1f0e0f761231"}
+
+======== 2026-04-04T12:40:48+0300 GET http://127.0.0.1:8080/api/v1/users/a12be997-d128-45da-bea0-1f0e0f761231 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"a12be997-d128-45da-bea0-1f0e0f761231", "email":"smoke-1775295647-1-14697@example.test", "phone":"76545925138", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:40:48.088172Z", "updatedAt":"2026-04-04T09:40:48.088172Z"}
+
+======== 2026-04-04T12:40:48+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:40:48+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:48:40+0300 PID=8817 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:48:40+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:48:40+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296120-1-6522@example.test","password":"secret123","phone":"71304549248"}
+HTTP 200
+{"userId":"15ab42c8-1bbb-4add-8d9e-bca888c83251", "message":"User created"}
+
+======== 2026-04-04T12:48:40+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296120-1-6522@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTVhYjQyYzgtMWJiYi00YWRkLThkOWUtYmNhODg4YzgzMjUxIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MTIwLTEtNjUyMkBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyOTcwMjAsImlhdCI6MTc3NTI5NjEyMH0.QhwaaTn43WTlr2L0NRAV4TZEk2wbXPhaC_Ug_uFLULI", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMTVhYjQyYzgtMWJiYi00YWRkLThkOWUtYmNhODg4YzgzMjUxIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MTIwLTEtNjUyMkBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTkwMDkyMCwiaWF0IjoxNzc1Mjk2MTIwfQ.xKOL70zyp0LPKN16rrEYfqwN8PiHFNkM81pZq6s13zY", "userId":"15ab42c8-1bbb-4add-8d9e-bca888c83251", "email":"smoke-1775296120-1-6522@example.test"}
+
+======== 2026-04-04T12:48:40+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"15ab42c8-1bbb-4add-8d9e-bca888c83251"}
+
+======== 2026-04-04T12:48:40+0300 GET http://127.0.0.1:8080/api/v1/users/15ab42c8-1bbb-4add-8d9e-bca888c83251 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"15ab42c8-1bbb-4add-8d9e-bca888c83251", "email":"smoke-1775296120-1-6522@example.test", "phone":"71304549248", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:48:40.511433Z", "updatedAt":"2026-04-04T09:48:40.511433Z"}
+
+======== 2026-04-04T12:48:40+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:48:40+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:51:33+0300 PID=9549 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:51:33+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:51:33+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296293-1-8069@example.test","password":"secret123","phone":"75474680010"}
+HTTP 200
+{"userId":"b7c71df8-2e69-4ab8-9d22-883733c75c03", "message":"User created"}
+
+======== 2026-04-04T12:51:33+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296293-1-8069@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYjdjNzFkZjgtMmU2OS00YWI4LTlkMjItODgzNzMzYzc1YzAzIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MjkzLTEtODA2OUBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyOTcxOTMsImlhdCI6MTc3NTI5NjI5M30.duTPT1Dcbgf50Epd9NVSY7LDQ5xLdBsqq6iOM9tVkU4", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiYjdjNzFkZjgtMmU2OS00YWI4LTlkMjItODgzNzMzYzc1YzAzIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MjkzLTEtODA2OUBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTkwMTA5MywiaWF0IjoxNzc1Mjk2MjkzfQ.JyYmyR4vviXe-tcKVeqWppX2NCJvUU8WVca-Y757i38", "userId":"b7c71df8-2e69-4ab8-9d22-883733c75c03", "email":"smoke-1775296293-1-8069@example.test"}
+
+======== 2026-04-04T12:51:33+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"b7c71df8-2e69-4ab8-9d22-883733c75c03"}
+
+======== 2026-04-04T12:51:33+0300 GET http://127.0.0.1:8080/api/v1/users/b7c71df8-2e69-4ab8-9d22-883733c75c03 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"b7c71df8-2e69-4ab8-9d22-883733c75c03", "email":"smoke-1775296293-1-8069@example.test", "phone":"75474680010", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:51:33.246483Z", "updatedAt":"2026-04-04T09:51:33.246483Z"}
+
+======== 2026-04-04T12:51:33+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:51:33+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:51:40+0300 PID=9772 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:51:40+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:51:40+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296300-1-14256@example.test","password":"secret123","phone":"71979650535"}
+HTTP 200
+{"userId":"e89fb7f9-a353-4281-9702-66d1132f5729", "message":"User created"}
+
+======== 2026-04-04T12:51:40+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296300-1-14256@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTg5ZmI3ZjktYTM1My00MjgxLTk3MDItNjZkMTEzMmY1NzI5IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MzAwLTEtMTQyNTZAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk3MjAwLCJpYXQiOjE3NzUyOTYzMDB9.zRpmVUUbMulDPgV62o0NhCfu-lo7B71AF3GtSqHwDAc", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTg5ZmI3ZjktYTM1My00MjgxLTk3MDItNjZkMTEzMmY1NzI5IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MzAwLTEtMTQyNTZAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDExMDAsImlhdCI6MTc3NTI5NjMwMH0.Oy-EEppm26PAvLUHBgHrSOOya-39rSB2i7R9l93pcmE", "userId":"e89fb7f9-a353-4281-9702-66d1132f5729", "email":"smoke-1775296300-1-14256@example.test"}
+
+======== 2026-04-04T12:51:40+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"e89fb7f9-a353-4281-9702-66d1132f5729"}
+
+======== 2026-04-04T12:51:40+0300 GET http://127.0.0.1:8080/api/v1/users/e89fb7f9-a353-4281-9702-66d1132f5729 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"e89fb7f9-a353-4281-9702-66d1132f5729", "email":"smoke-1775296300-1-14256@example.test", "phone":"71979650535", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:51:40.360530Z", "updatedAt":"2026-04-04T09:51:40.360530Z"}
+
+======== 2026-04-04T12:51:40+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:51:40+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:51:48+0300 PID=9999 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:51:48+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:51:48+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296308-1-6330@example.test","password":"secret123","phone":"71952182650"}
+HTTP 200
+{"userId":"1a3b26bd-822d-4b77-98fb-a470a6077675", "message":"User created"}
+
+======== 2026-04-04T12:51:48+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296308-1-6330@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWEzYjI2YmQtODIyZC00Yjc3LTk4ZmItYTQ3MGE2MDc3Njc1IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MzA4LTEtNjMzMEBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyOTcyMDgsImlhdCI6MTc3NTI5NjMwOH0.1E62snvWcs6F9NPQNTas7S9YjUUOaMN4eE63nzfZjUw", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWEzYjI2YmQtODIyZC00Yjc3LTk4ZmItYTQ3MGE2MDc3Njc1IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2MzA4LTEtNjMzMEBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTkwMTEwOCwiaWF0IjoxNzc1Mjk2MzA4fQ.uhlF1GWiZcN-0M9dbuFg3ilOdBiBUi1Tq35xHUSWdwc", "userId":"1a3b26bd-822d-4b77-98fb-a470a6077675", "email":"smoke-1775296308-1-6330@example.test"}
+
+======== 2026-04-04T12:51:48+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"1a3b26bd-822d-4b77-98fb-a470a6077675"}
+
+======== 2026-04-04T12:51:48+0300 GET http://127.0.0.1:8080/api/v1/users/1a3b26bd-822d-4b77-98fb-a470a6077675 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"1a3b26bd-822d-4b77-98fb-a470a6077675", "email":"smoke-1775296308-1-6330@example.test", "phone":"71952182650", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:51:48.553492Z", "updatedAt":"2026-04-04T09:51:48.553492Z"}
+
+======== 2026-04-04T12:51:48+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:51:48+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:55:22+0300 PID=11213 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:55:22+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:55:22+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296522-1-32487@example.test","password":"secret123","phone":"71442406165"}
+HTTP 200
+{"userId":"e868045b-fcf5-45e1-b683-a2bf1d3d4dea", "message":"User created"}
+
+======== 2026-04-04T12:55:22+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296522-1-32487@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTg2ODA0NWItZmNmNS00NWUxLWI2ODMtYTJiZjFkM2Q0ZGVhIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2NTIyLTEtMzI0ODdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk3NDIyLCJpYXQiOjE3NzUyOTY1MjJ9.CRsh11ac0ee3zL9mJSig3pUeCfq2H0tH38jEM89SRb0", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiZTg2ODA0NWItZmNmNS00NWUxLWI2ODMtYTJiZjFkM2Q0ZGVhIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2NTIyLTEtMzI0ODdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDEzMjIsImlhdCI6MTc3NTI5NjUyMn0.6rikhXjCfrnL_k3CS50Dr9IWDc8Be8W7DFe8c6YjAyM", "userId":"e868045b-fcf5-45e1-b683-a2bf1d3d4dea", "email":"smoke-1775296522-1-32487@example.test"}
+
+======== 2026-04-04T12:55:22+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"e868045b-fcf5-45e1-b683-a2bf1d3d4dea"}
+
+======== 2026-04-04T12:55:22+0300 GET http://127.0.0.1:8080/api/v1/users/e868045b-fcf5-45e1-b683-a2bf1d3d4dea ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"e868045b-fcf5-45e1-b683-a2bf1d3d4dea", "email":"smoke-1775296522-1-32487@example.test", "phone":"71442406165", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:55:22.487853Z", "updatedAt":"2026-04-04T09:55:22.487853Z"}
+
+======== 2026-04-04T12:55:22+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:55:22+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:59:33+0300 PID=13889 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:59:33+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:59:33+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296773-1-2370@example.test","password":"secret123","phone":"77143407082"}
+HTTP 200
+{"userId":"8150881e-119d-4862-b03b-26fa99c1c554", "message":"User created"}
+
+======== 2026-04-04T12:59:33+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296773-1-2370@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODE1MDg4MWUtMTE5ZC00ODYyLWIwM2ItMjZmYTk5YzFjNTU0IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2NzczLTEtMjM3MEBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiaXNzIjoiVXNlclNlcnZpY2UiLCJzdWIiOiJhY2Nlc3MiLCJleHAiOjE3NzUyOTc2NzMsImlhdCI6MTc3NTI5Njc3M30.aK7krjlhyQpG8Vu8xWOJMA9_azy0ZEkfzuITUPP7IGM", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiODE1MDg4MWUtMTE5ZC00ODYyLWIwM2ItMjZmYTk5YzFjNTU0IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2NzczLTEtMjM3MEBleGFtcGxlLnRlc3QiLCJ0b2tlbl90eXBlIjoicmVmcmVzaCIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoicmVmcmVzaCIsImV4cCI6MTc3NTkwMTU3MywiaWF0IjoxNzc1Mjk2NzczfQ.oQslNpyKNxqJMTlmw7vFlSX12J-0CDpJhYc5gS5lelw", "userId":"8150881e-119d-4862-b03b-26fa99c1c554", "email":"smoke-1775296773-1-2370@example.test"}
+
+======== 2026-04-04T12:59:33+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"8150881e-119d-4862-b03b-26fa99c1c554"}
+
+======== 2026-04-04T12:59:33+0300 GET http://127.0.0.1:8080/api/v1/users/8150881e-119d-4862-b03b-26fa99c1c554 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"8150881e-119d-4862-b03b-26fa99c1c554", "email":"smoke-1775296773-1-2370@example.test", "phone":"77143407082", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:59:33.449886Z", "updatedAt":"2026-04-04T09:59:33.449886Z"}
+
+======== 2026-04-04T12:59:33+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:59:33+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T12:59:56+0300 PID=14320 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T12:59:56+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T12:59:56+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296796-1-12017@example.test","password":"secret123","phone":"78714290615"}
+HTTP 200
+{"userId":"1cae22a8-e7e4-4e0c-b789-5a8416f6c407", "message":"User created"}
+
+======== 2026-04-04T12:59:57+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296796-1-12017@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWNhZTIyYTgtZTdlNC00ZTBjLWI3ODktNWE4NDE2ZjZjNDA3IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2Nzk2LTEtMTIwMTdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk3Njk3LCJpYXQiOjE3NzUyOTY3OTd9.b0jC-qGSQHFURrR3PyrLf_VBEBIdTTnYcK0k4LFqoGo", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWNhZTIyYTgtZTdlNC00ZTBjLWI3ODktNWE4NDE2ZjZjNDA3IiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2Nzk2LTEtMTIwMTdAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDE1OTcsImlhdCI6MTc3NTI5Njc5N30.yUqkZeGGBEqsnzWv0oyoHJb-yyrQUE3mHUF6HZgo2Ew", "userId":"1cae22a8-e7e4-4e0c-b789-5a8416f6c407", "email":"smoke-1775296796-1-12017@example.test"}
+
+======== 2026-04-04T12:59:57+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"1cae22a8-e7e4-4e0c-b789-5a8416f6c407"}
+
+======== 2026-04-04T12:59:57+0300 GET http://127.0.0.1:8080/api/v1/users/1cae22a8-e7e4-4e0c-b789-5a8416f6c407 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"1cae22a8-e7e4-4e0c-b789-5a8416f6c407", "email":"smoke-1775296796-1-12017@example.test", "phone":"78714290615", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T09:59:56.912269Z", "updatedAt":"2026-04-04T09:59:56.912269Z"}
+
+======== 2026-04-04T12:59:57+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T12:59:57+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T13:02:31+0300 PID=15254 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T13:02:31+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T13:02:31+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775296951-1-31621@example.test","password":"secret123","phone":"76700631559"}
+HTTP 200
+{"userId":"1f826d6d-ed9e-43af-8626-dfdea2533cc2", "message":"User created"}
+
+======== 2026-04-04T13:02:31+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775296951-1-31621@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWY4MjZkNmQtZWQ5ZS00M2FmLTg2MjYtZGZkZWEyNTMzY2MyIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2OTUxLTEtMzE2MjFAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk3ODUxLCJpYXQiOjE3NzUyOTY5NTF9.IEJ0ovrH9JA8bKU0AOw9OEedHZFdtc0H1_Qr9cQOisA", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiMWY4MjZkNmQtZWQ5ZS00M2FmLTg2MjYtZGZkZWEyNTMzY2MyIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk2OTUxLTEtMzE2MjFAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDE3NTEsImlhdCI6MTc3NTI5Njk1MX0.14a4OhuOZuWMrOH1_OGQoG6QKW6YbsN2fSYvN2h5nr8", "userId":"1f826d6d-ed9e-43af-8626-dfdea2533cc2", "email":"smoke-1775296951-1-31621@example.test"}
+
+======== 2026-04-04T13:02:31+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"1f826d6d-ed9e-43af-8626-dfdea2533cc2"}
+
+======== 2026-04-04T13:02:32+0300 GET http://127.0.0.1:8080/api/v1/users/1f826d6d-ed9e-43af-8626-dfdea2533cc2 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"1f826d6d-ed9e-43af-8626-dfdea2533cc2", "email":"smoke-1775296951-1-31621@example.test", "phone":"76700631559", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T10:02:31.831375Z", "updatedAt":"2026-04-04T10:02:31.831375Z"}
+
+======== 2026-04-04T13:02:32+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T13:02:32+0300 SCRIPT DONE SUCCESS ========
+
+
+>>>>>>>> Session start 2026-04-04T13:31:55+0300 PID=20633 BASE_URL=http://127.0.0.1:8080 LOG_FILE=/Users/polzovatel/Desktop/FitnessUserService/UserService/smoke_gateway.log
+NOTE: ответы могут содержать токены и персональные данные.
+
+======== 2026-04-04T13:31:55+0300 GET http://127.0.0.1:8080/api/v1/train/health ========
+HTTP 200
+{"ok":true}
+
+======== 2026-04-04T13:31:55+0300 POST http://127.0.0.1:8080/api/v1/users ========
+request: body={"email":"smoke-1775298715-1-16315@example.test","password":"secret123","phone":"76024338635"}
+HTTP 200
+{"userId":"7081ee84-0578-4e6d-802c-e5a8cd435232", "message":"User created"}
+
+======== 2026-04-04T13:31:55+0300 POST http://127.0.0.1:8080/api/v1/auth/login ========
+request: body={"email":"smoke-1775298715-1-16315@example.test","password":"secret123"}
+HTTP 200
+{"accessToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzA4MWVlODQtMDU3OC00ZTZkLTgwMmMtZTVhOGNkNDM1MjMyIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk4NzE1LTEtMTYzMTVAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6ImFjY2VzcyIsImlzcyI6IlVzZXJTZXJ2aWNlIiwic3ViIjoiYWNjZXNzIiwiZXhwIjoxNzc1Mjk5NjE1LCJpYXQiOjE3NzUyOTg3MTV9.RuhsiOymd8VD5K32ZnitAM7B96WhRH-jM9mwdW1464A", "refreshToken":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNzA4MWVlODQtMDU3OC00ZTZkLTgwMmMtZTVhOGNkNDM1MjMyIiwiZW1haWwiOiJzbW9rZS0xNzc1Mjk4NzE1LTEtMTYzMTVAZXhhbXBsZS50ZXN0IiwidG9rZW5fdHlwZSI6InJlZnJlc2giLCJpc3MiOiJVc2VyU2VydmljZSIsInN1YiI6InJlZnJlc2giLCJleHAiOjE3NzU5MDM1MTUsImlhdCI6MTc3NTI5ODcxNX0.X1FIOk2u4-QCHBcwWpwf3E5KKeP0x66QD29Ad7KLLXo", "userId":"7081ee84-0578-4e6d-802c-e5a8cd435232", "email":"smoke-1775298715-1-16315@example.test"}
+
+======== 2026-04-04T13:31:55+0300 GET http://127.0.0.1:8080/api/v1/users/me/id ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"7081ee84-0578-4e6d-802c-e5a8cd435232"}
+
+======== 2026-04-04T13:31:55+0300 GET http://127.0.0.1:8080/api/v1/users/7081ee84-0578-4e6d-802c-e5a8cd435232 ========
+request: Authorization=Bearer ***
+HTTP 200
+{"userId":"7081ee84-0578-4e6d-802c-e5a8cd435232", "email":"smoke-1775298715-1-16315@example.test", "phone":"76024338635", "isActive":true, "subscriptionStatus":"SUBSCRIPTION_STATUS_NONE", "subscriptionExpires":null, "createdAt":"2026-04-04T10:31:55.602357Z", "updatedAt":"2026-04-04T10:31:55.602357Z"}
+
+======== 2026-04-04T13:31:55+0300 GET http://127.0.0.1:8080/api/v1/train/plans ========
+request: Authorization=Bearer ***
+HTTP 200
+{"plans":[]}
+
+======== 2026-04-04T13:31:55+0300 SCRIPT DONE SUCCESS ========
+
