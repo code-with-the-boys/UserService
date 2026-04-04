@@ -1,0 +1,168 @@
+{
+  "title": "UserService gRPC Monitoring",
+  "uid": "user-service-grpc",
+  "tags": ["grpc", "user-service"],
+  "timezone": "browser",
+  "schemaVersion": 27,
+  "version": 1,
+  "refresh": "30s",
+  "panels": [
+    {
+      "title": "Requests per Method (by status code)",
+      "type": "barchart",
+      "gridPos": {"h": 8, "w": 12, "x": 0, "y": 0},
+      "targets": [
+        {
+          "expr": "sum by (method, code) (grpc_requests_total)",
+          "legendFormat": "{{method}} ({{code}})",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        }
+      ],
+      "fieldConfig": {
+        "defaults": {
+          "unit": "short",
+          "custom": {"displayMode": "bar", "stacking": "normal"}
+        }
+      }
+    },
+    {
+      "title": "Request Duration (p50, p95, p99)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.50, sum(rate(grpc_request_duration_seconds_bucket[5m])) by (le, method))",
+          "legendFormat": "p50 - {{method}}",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(grpc_request_duration_seconds_bucket[5m])) by (le, method))",
+          "legendFormat": "p95 - {{method}}",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        },
+        {
+          "expr": "histogram_quantile(0.99, sum(rate(grpc_request_duration_seconds_bucket[5m])) by (le, method))",
+          "legendFormat": "p99 - {{method}}",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "s"}}
+    },
+    {
+      "title": "In-flight Requests",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 6, "x": 0, "y": 8},
+      "targets": [
+        {
+          "expr": "grpc_requests_in_flight",
+          "legendFormat": "{{method}}",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "short"}}
+    },
+    {
+      "title": "Request / Response Size (bytes)",
+      "type": "timeseries",
+      "gridPos": {"h": 8, "w": 6, "x": 6, "y": 8},
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(grpc_request_size_bytes_bucket[5m])) by (le, method))",
+          "legendFormat": "req size p95 - {{method}}",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        },
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(grpc_response_size_bytes_bucket[5m])) by (le, method))",
+          "legendFormat": "resp size p95 - {{method}}",
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        }
+      ],
+      "fieldConfig": {"defaults": {"unit": "bytes"}}
+    },
+    {
+      "title": "Top 5 Slowest Methods (avg duration)",
+      "type": "table",
+      "gridPos": {"h": 8, "w": 12, "x": 12, "y": 8},
+      "targets": [
+        {
+          "expr": "avg by (method) (rate(grpc_request_duration_seconds_sum[5m]) / rate(grpc_request_duration_seconds_count[5m]))",
+          "format": "table",
+          "instant": true,
+          "datasource": {"type": "victoriametrics", "uid": "victoriametrics"}
+        }
+      ],
+      "transformations": [
+        {
+          "id": "sortBy",
+          "options": {"fields": {"Value": {"desc": true}}, "limit": 5}
+        }
+      ]
+    },
+    {
+      "title": "Recent Error Logs (level=error)",
+      "type": "logs",
+      "gridPos": {"h": 12, "w": 24, "x": 0, "y": 16},
+      "targets": [
+        {
+          "expr": "{container_name=\"fitness_app\"} |= `\"level\":\"error\"`",
+          "refId": "A",
+          "datasource": {"type": "loki", "uid": "loki"}
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": false,
+        "wrapLogMessage": true,
+        "prettifyLogMessage": true,
+        "dedupStrategy": "none"
+      }
+    },
+    {
+      "title": "All Logs (filterable)",
+      "type": "logs",
+      "gridPos": {"h": 12, "w": 24, "x": 0, "y": 28},
+      "targets": [
+        {
+          "expr": "{container_name=\"fitness_app\"}",
+          "refId": "A",
+          "datasource": {"type": "loki", "uid": "loki"}
+        }
+      ],
+      "options": {
+        "showTime": true,
+        "showLabels": true,
+        "wrapLogMessage": true,
+        "prettifyLogMessage": true
+      }
+    }
+  ],
+  "templating": {
+    "list": [
+      {
+        "name": "method",
+        "type": "query",
+        "datasource": {"type": "victoriametrics", "uid": "victoriametrics"},
+        "query": "label_values(grpc_requests_total, method)",
+        "refresh": 2,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*"
+      },
+      {
+        "name": "code",
+        "type": "query",
+        "datasource": {"type": "victoriametrics", "uid": "victoriametrics"},
+        "query": "label_values(grpc_requests_total, code)",
+        "refresh": 2,
+        "multi": true,
+        "includeAll": true,
+        "allValue": ".*"
+      }
+    ]
+  },
+  "time": {"from": "now-1h", "to": "now"},
+  "timepicker": {
+    "refresh_intervals": ["30s", "1m", "5m", "15m", "30m", "1h"],
+    "time_options": ["5m", "15m", "1h", "6h", "12h", "24h", "2d", "7d"]
+  }
+}

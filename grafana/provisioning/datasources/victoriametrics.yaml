@@ -1,0 +1,10 @@
+apiVersion: 1
+datasources:
+  - name: VictoriaLogs
+    type: loki
+    access: proxy
+    url: http://victorialogs:9428
+    uid: victorialogs
+    editable: false
+    jsonData:
+      derivedFields: []
