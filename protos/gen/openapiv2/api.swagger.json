@@ -1,0 +1,564 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "train_service_api/v1/train_service.proto",
+    "version": "version not set"
+  },
+  "tags": [
+    {
+      "name": "TrainService"
+    }
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/api/v1/train/health": {
+      "get": {
+        "operationId": "TrainService_Health",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1HealthResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "tags": [
+          "TrainService"
+        ]
+      }
+    },
+    "/api/v1/train/plans": {
+      "get": {
+        "operationId": "TrainService_GetTrainingPlans",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTrainingPlansResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      },
+      "post": {
+        "operationId": "TrainService_CreateTrainingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1CreateTrainingPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/v1CreateTrainingPlanRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      }
+    },
+    "/api/v1/train/plans/{planId}": {
+      "get": {
+        "operationId": "TrainService_GetTrainingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetTrainingPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      },
+      "delete": {
+        "operationId": "TrainService_DeleteTrainingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1DeleteTrainingPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      },
+      "put": {
+        "operationId": "TrainService_UpdateTrainingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1UpdateTrainingPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainServiceUpdateTrainingPlanBody"
+            }
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      }
+    },
+    "/api/v1/train/plans/{planId}/adjust": {
+      "post": {
+        "operationId": "TrainService_AdjustTrainingPlan",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1AdjustTrainingPlanResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainServiceAdjustTrainingPlanBody"
+            }
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      }
+    },
+    "/api/v1/train/plans/{planId}/next-workout": {
+      "get": {
+        "operationId": "TrainService_GetNextWorkout",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/v1GetNextWorkoutResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "planId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TrainService"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "TrainServiceAdjustTrainingPlanBody": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        }
+      }
+    },
+    "TrainServiceUpdateTrainingPlanBody": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "planName": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        }
+      }
+    },
+    "protobufAny": {
+      "type": "object",
+      "properties": {
+        "@type": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": {}
+    },
+    "rpcStatus": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "message": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/protobufAny"
+          }
+        }
+      }
+    },
+    "v1AdjustTrainingPlanResponse": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/v1TrainingPlan"
+        },
+        "changes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1PlanChange"
+          }
+        }
+      }
+    },
+    "v1CreateTrainingPlanRequest": {
+      "type": "object",
+      "properties": {
+        "userId": {
+          "type": "string"
+        },
+        "planName": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "goalType": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "durationWeeks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "aiGenerated": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1CreateTrainingPlanResponse": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/v1TrainingPlan"
+        }
+      }
+    },
+    "v1DeleteTrainingPlanResponse": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1GetNextWorkoutResponse": {
+      "type": "object",
+      "properties": {
+        "workoutType": {
+          "type": "string"
+        },
+        "estimatedDurationMinutes": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1PlanExercise"
+          }
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "v1GetTrainingPlanResponse": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/v1TrainingPlan"
+        },
+        "exercises": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1PlanExercise"
+          }
+        },
+        "completionPercentage": {
+          "type": "number",
+          "format": "float"
+        },
+        "workoutsCompleted": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "workoutsTotal": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    },
+    "v1GetTrainingPlansResponse": {
+      "type": "object",
+      "properties": {
+        "plans": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/v1TrainingPlan"
+          }
+        }
+      }
+    },
+    "v1HealthResponse": {
+      "type": "object",
+      "properties": {
+        "ok": {
+          "type": "boolean"
+        }
+      }
+    },
+    "v1PlanChange": {
+      "type": "object",
+      "properties": {
+        "field": {
+          "type": "string"
+        },
+        "oldValue": {
+          "type": "string"
+        },
+        "newValue": {
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    },
+    "v1PlanExercise": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "planId": {
+          "type": "string"
+        },
+        "exerciseId": {
+          "type": "string"
+        },
+        "weekNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "dayNumber": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "sets": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "reps": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "v1TrainingPlan": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "string"
+        },
+        "planName": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        },
+        "goalType": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "createdBy": {
+          "type": "string"
+        },
+        "durationWeeks": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "v1UpdateTrainingPlanResponse": {
+      "type": "object",
+      "properties": {
+        "plan": {
+          "$ref": "#/definitions/v1TrainingPlan"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,191 @@
+syntax = "proto3";
+package train_service_api.v1;
+
+option go_package = "github.com/mihnpro/UserServiceProtos/gen/go/train_service_apiv1;train_service_apiv1";
+
+import "google/protobuf/timestamp.proto";
+import "vendor.proto/google/api/annotations.proto";
+
+service TrainService {
+  rpc Health(HealthRequest) returns (HealthResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/train/health"
+    };
+  }
+
+  rpc GetTrainingPlans(GetTrainingPlansRequest) returns (GetTrainingPlansResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/train/plans"
+    };
+  }
+  rpc CreateTrainingPlan(CreateTrainingPlanRequest) returns (CreateTrainingPlanResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/train/plans"
+      body: "*"
+    };
+  }
+  rpc GetTrainingPlan(GetTrainingPlanRequest) returns (GetTrainingPlanResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/train/plans/{plan_id}"
+    };
+  }
+  rpc UpdateTrainingPlan(UpdateTrainingPlanRequest) returns (UpdateTrainingPlanResponse) {
+    option (google.api.http) = {
+      put: "/api/v1/train/plans/{plan_id}"
+      body: "*"
+    };
+  }
+  rpc DeleteTrainingPlan(DeleteTrainingPlanRequest) returns (DeleteTrainingPlanResponse) {
+    option (google.api.http) = {
+      delete: "/api/v1/train/plans/{plan_id}"
+    };
+  }
+  rpc AdjustTrainingPlan(AdjustTrainingPlanRequest) returns (AdjustTrainingPlanResponse) {
+    option (google.api.http) = {
+      post: "/api/v1/train/plans/{plan_id}/adjust"
+      body: "*"
+    };
+  }
+  rpc GetNextWorkout(GetNextWorkoutRequest) returns (GetNextWorkoutResponse) {
+    option (google.api.http) = {
+      get: "/api/v1/train/plans/{plan_id}/next-workout"
+    };
+  }
+}
+
+// ─── Health ───────────────────────────────────────────────────────────────────
+
+message HealthRequest {}
+
+message HealthResponse {
+  bool ok = 1;
+}
+
+// ─── Training Plans ───────────────────────────────────────────────────────────
+
+message TrainingPlan {
+  string id = 1;
+  string user_id = 2;
+  string plan_name = 3;
+  string start_date = 4;
+  string end_date = 5;
+  string goal_type = 6;
+  string status = 7;
+  string created_by = 8;
+  optional int32 duration_weeks = 9;
+  google.protobuf.Timestamp created_at = 10;
+}
+
+message PlanExercise {
+  string id = 1;
+  string plan_id = 2;
+  string exercise_id = 3;
+  int32 week_number = 4;
+  int32 day_number = 5;
+  int32 sets = 6;
+  string reps = 7;
+  string notes = 8;
+}
+
+message TrainingPlanDetail {
+  TrainingPlan plan = 1;
+  repeated PlanExercise exercises = 2;
+  float completion_percentage = 3;
+  int32 workouts_completed = 4;
+  int32 workouts_total = 5;
+}
+
+message WorkoutTemplate {
+  string workout_type = 1;
+  int32 estimated_duration_minutes = 2;
+  repeated PlanExercise exercises = 3;
+  string notes = 4;
+}
+
+message PlanChange {
+  string field = 1;
+  string old_value = 2;
+  string new_value = 3;
+  string reason = 4;
+}
+
+// ─── Requests / Responses ─────────────────────────────────────────────────────
+
+message GetTrainingPlansRequest {
+  string user_id = 1;
+  string status = 2;
+}
+
+message GetTrainingPlansResponse {
+  repeated TrainingPlan plans = 1;
+}
+
+message CreateTrainingPlanRequest {
+  string user_id = 1;
+  string plan_name = 2;
+  string start_date = 3;
+  string goal_type = 4;
+  string end_date = 5;
+  optional int32 duration_weeks = 6;
+  bool ai_generated = 7;
+}
+
+message GetTrainingPlanRequest {
+  string plan_id = 1;
+  string user_id = 2;
+}
+
+message UpdateTrainingPlanRequest {
+  string plan_id = 1;
+  string user_id = 2;
+  string plan_name = 3;
+  string end_date = 4;
+  string status = 5;
+}
+
+message DeleteTrainingPlanRequest {
+  string plan_id = 1;
+  string user_id = 2;
+}
+
+message DeleteTrainingPlanResponse {
+  bool ok = 1;
+}
+
+message AdjustTrainingPlanRequest {
+  string plan_id = 1;
+  string user_id = 2;
+}
+
+message AdjustTrainingPlanResponse {
+  TrainingPlan plan = 1;
+  repeated PlanChange changes = 2;
+}
+
+message GetNextWorkoutRequest {
+  string plan_id = 1;
+  string user_id = 2;
+}
+
+message CreateTrainingPlanResponse {
+  TrainingPlan plan = 1;
+}
+
+message GetTrainingPlanResponse {
+  TrainingPlan plan = 1;
+  repeated PlanExercise exercises = 2;
+  float completion_percentage = 3;
+  int32 workouts_completed = 4;
+  int32 workouts_total = 5;
+}
+
+message UpdateTrainingPlanResponse {
+  TrainingPlan plan = 1;
+}
+
+message GetNextWorkoutResponse {
+  string workout_type = 1;
+  int32 estimated_duration_minutes = 2;
+  repeated PlanExercise exercises = 3;
+  string notes = 4;
+}

@@ -1,4 +1,4 @@
-module protos
+module github.com/mihnpro/UserServiceProtos
 
 go 1.25.0
 

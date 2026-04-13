@@ -1,0 +1,28 @@
+[sources.docker_logs]
+type = "docker_logs"
+docker_host = "unix:///var/run/docker.sock"
+include_containers = ["fitness_app"]
+
+[transforms.parse_json]
+type = "remap"
+inputs = ["docker_logs"]
+source = '''
+  parsed = parse_json(.message) ?? {}
+  . = merge!(., parsed)
+  .timestamp = now()
+'''
+
+# Отправка логов в Loki
+[sinks.loki]
+type = "loki"
+inputs = ["parse_json"]
+endpoint = "http://loki:3100"
+encoding.codec = "json"
+batch.max_bytes = 102400
+batch.timeout_secs = 5
+request.timeout_secs = 10
+
+[sinks.loki.labels]
+container_name = "{{ container_name }}"
+source_type = "{{ source_type }}"
+service = "fitness-app"
