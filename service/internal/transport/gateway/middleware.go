@@ -62,6 +62,13 @@ func IsPublicHTTPRoute(method, path string) bool {
 	if method == http.MethodGet && path == "/api/v1/train/health" {
 		return true
 	}
+	// PaymentService (reverse proxy): liveness и Stripe webhook без JWT
+	if method == http.MethodGet && path == "/api/v1/payment/health" {
+		return true
+	}
+	if method == http.MethodPost && path == "/api/v1/payment/webhooks/stripe" {
+		return true
+	}
 	switch path {
 	case "/api/v1/auth/login", "/api/v1/auth/refresh":
 		return method == http.MethodPost
