@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"os/signal"
+	"strings"
 	"syscall"
 	"time"
 
@@ -118,6 +119,15 @@ func main() {
 	}
 
 	mainMux := http.NewServeMux()
+	paymentURL := strings.TrimSpace(os.Getenv("PAYMENT_SERVICE_HTTP_URL"))
+	if paymentURL != "" {
+		paymentHandler, err := gw.NewPaymentHTTPProxy(logger, paymentURL)
+		if err != nil {
+			logger.Fatal("payment proxy", zap.String("url", paymentURL), zap.Error(err))
+		}
+		mainMux.Handle("/api/v1/payment/", http.StripPrefix("/api/v1/payment", paymentHandler))
+		logger.Info("payment reverse proxy enabled", zap.String("target", paymentURL), zap.String("prefix", "/api/v1/payment"))
+	}
 	mainMux.Handle("/", mux)
 	mainMux.Handle("/metrics", promhttp.Handler())
 

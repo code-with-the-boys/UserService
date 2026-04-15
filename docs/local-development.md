@@ -65,6 +65,12 @@ export REDIS_DB=12
 export JWT_ACCESS_SECRET='длинный-секрет-для-access'
 export JWT_REFRESH_SECRET='длинный-секрет-для-refresh'
 
+# опционально: PaymentService на :8000 → клиент бьёт в шлюз /api/v1/payment/... с тем же JWT
+# export PAYMENT_SERVICE_HTTP_URL='http://127.0.0.1:8000'
+
+# прокси Payment на Litestar (смоук PaymentService/scripts/smoke-e2e.sh через шлюз)
+export PAYMENT_SERVICE_HTTP_URL='http://127.0.0.1:8000'
+
 HTTP_ADDR=':8080' GRPC_ADDR=':9090' TRAIN_GRPC_ADDR='127.0.0.1:50051' go run ./cmd/main.go
 ```
 
