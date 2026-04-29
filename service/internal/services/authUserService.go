@@ -199,17 +199,17 @@ func (s *authUserService) CheckUserForLogin(ctx context.Context, request *UserSe
 	userByEmail, err := s.authUserRepo.FindUserByEmail(ctx, request.Email)
 
 	if err != nil {
-        if errors.Is(err, psqlrepo.ErrNotFound) {
-            s.logger.Warn("user not found",
-                zap.String("email", request.Email))
-            return nil, customErrors.NewNotFoundError("User not found")
-        }
-        s.logger.Warn("error while finding user by email",
-            zap.String("field", "email"),
-            zap.String("database_error", err.Error()),
-        )
-        return nil, customErrors.NewInternalError(err.Error())
-    }
+		if errors.Is(err, psqlrepo.ErrNotFound) {
+			s.logger.Warn("user not found",
+				zap.String("email", request.Email))
+			return nil, customErrors.NewNotFoundError("User not found")
+		}
+		s.logger.Warn("error while finding user by email",
+			zap.String("field", "email"),
+			zap.String("database_error", err.Error()),
+		)
+		return nil, customErrors.NewInternalError(err.Error())
+	}
 
 	if userByEmail == nil {
 		s.logger.Warn("user has not been registred before",

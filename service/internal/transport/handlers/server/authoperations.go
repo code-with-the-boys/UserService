@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"time"
+
 	service "github.com/code-with-the-boys/UserService/internal/services"
 	userServicepb "github.com/mihnpro/UserServiceProtos/gen/go/userServicepb"
 	"go.uber.org/zap"
@@ -40,7 +41,7 @@ func (s *UserServiceServer) SignUp(ctx context.Context, req *userServicepb.SignU
 	userResponse, err := s.authUserService.CreateUser(ctx, &service.UserServiceSignUpRequest{
 		Email:    req.Email,
 		Password: req.Password,
-		Phone:    *req.Phone,
+		Phone:    req.GetPhone(),
 	})
 
 	if err != nil {

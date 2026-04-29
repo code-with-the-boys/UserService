@@ -91,7 +91,6 @@ func (u *userOperationsService) DeleteUserInfo(ctx context.Context, userID strin
 
 func (u *userOperationsService) UpdateUserInfo(ctx context.Context, req *UserServiceUserInfo) (*userServicepb.UpdateUserResponse, error) {
 
-
 	existingUser, err := u.userOperationsRepo.FindUserByID(ctx, req.UserID)
 	if err != nil {
 		u.logger.Warn("user not found",
@@ -215,7 +214,6 @@ func (u *userOperationsService) GetUserInfo(ctx context.Context, userID string) 
 	}, nil
 
 }
-
 
 func getChangedFields(updateData *domain.User) []string {
 	var changes []string
