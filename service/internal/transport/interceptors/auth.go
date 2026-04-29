@@ -13,11 +13,9 @@ import (
 	"google.golang.org/grpc/status"
 )
 
-
 type InterceptorsAuth interface {
 	AuthRequired() grpc.UnaryServerInterceptor
 }
-
 
 type interceptorAuth struct {
 	logger      *zap.Logger
@@ -25,13 +23,12 @@ type interceptorAuth struct {
 	skipMethods map[string]bool
 }
 
-
 func NewInterceptorAuth(
 	logger *zap.Logger,
 	skipMethods map[string]bool,
 	jwt auth.JwtAuth,
-	) InterceptorsAuth {
-		if logger == nil {
+) InterceptorsAuth {
+	if logger == nil {
 		logger = zap.NewNop()
 	}
 	return &interceptorAuth{
@@ -40,7 +37,6 @@ func NewInterceptorAuth(
 		skipMethods: skipMethods,
 	}
 }
-
 
 func (i *interceptorAuth) AuthRequired() grpc.UnaryServerInterceptor {
 	return func(

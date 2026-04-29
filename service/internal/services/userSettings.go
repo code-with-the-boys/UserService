@@ -4,8 +4,8 @@ import (
 	"context"
 	"time"
 
-	"github.com/code-with-the-boys/UserService/internal/domain"
 	"github.com/code-with-the-boys/UserService/internal/customErrors"
+	"github.com/code-with-the-boys/UserService/internal/domain"
 	psqlrepo "github.com/code-with-the-boys/UserService/internal/repository/psqlRepo"
 	"github.com/google/uuid"
 	"go.uber.org/zap"
@@ -159,4 +159,3 @@ func toDTO(settings *domain.UserSettings) *UserServiceUserSettings {
 		UpdatedAt:            settings.UpdatedAt,
 	}
 }
-

@@ -170,7 +170,6 @@ func (u *userProfileRepository) DeleteUserProfile(ctx context.Context, userID st
 	return nil
 }
 
-
 func (u *userProfileRepository) DeleteUserProfileInTx(ctx context.Context, userID string, tx *sql.Tx) error {
 	const query = `DELETE FROM user_profiles WHERE user_id = $1`
 	_, err := tx.ExecContext(ctx, query, userID)
