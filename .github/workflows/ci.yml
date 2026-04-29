@@ -19,7 +19,7 @@ jobs:
 
       - name: go vet
         working-directory: service
-        run: go vet ./...
+        run: go vet -mod=mod ./...
 
       - name: gofmt check
         working-directory: service
@@ -43,7 +43,7 @@ jobs:
 
       - name: Run unit tests
         working-directory: service
-        run: go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
+        run: go test -mod=mod -v -race -coverprofile=coverage.out -covermode=atomic ./...
 
       - name: Show coverage summary
         working-directory: service
