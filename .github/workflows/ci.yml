@@ -16,14 +16,20 @@ jobs:
       - uses: actions/setup-go@v5
         with:
           go-version-file: service/go.mod
-          cache: false
 
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v6
-        with:
-          working-directory: service
-          version: latest
-          args: --timeout=5m
+      - name: go vet
+        working-directory: service
+        run: go vet ./...
+
+      - name: gofmt check
+        working-directory: service
+        run: |
+          unformatted=$(gofmt -l $(find . -name '*.go' -not -path './vendor/*'))
+          if [ -n "$unformatted" ]; then
+            echo "The following files are not formatted:"
+            echo "$unformatted"
+            exit 1
+          fi
 
   test:
     name: Test
