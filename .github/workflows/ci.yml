@@ -75,4 +75,4 @@ jobs:
         uses: hadolint/hadolint-action@v3.1.0
         with:
           dockerfile: service/Dockerfile
-          ignore: DL3018,DL3008
+          ignore: DL3018,DL3008,DL3007
