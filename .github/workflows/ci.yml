@@ -10,6 +10,8 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    env:
+      GOFLAGS: "-mod=mod"
     steps:
       - uses: actions/checkout@v4
 
@@ -19,7 +21,7 @@ jobs:
 
       - name: go vet
         working-directory: service
-        run: go vet -mod=mod ./...
+        run: go vet ./...
 
       - name: gofmt check
         working-directory: service
@@ -34,6 +36,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    env:
+      GOFLAGS: "-mod=mod"
     steps:
       - uses: actions/checkout@v4
 
@@ -43,7 +47,7 @@ jobs:
 
       - name: Run unit tests
         working-directory: service
-        run: go test -mod=mod -v -race -coverprofile=coverage.out -covermode=atomic ./...
+        run: go test -v -race -coverprofile=coverage.out -covermode=atomic ./...
 
       - name: Show coverage summary
         working-directory: service
