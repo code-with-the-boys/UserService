@@ -10,6 +10,8 @@ jobs:
   lint:
     name: Lint
     runs-on: ubuntu-latest
+    env:
+      GOFLAGS: "-mod=mod"
     steps:
       - uses: actions/checkout@v4
 
@@ -34,6 +36,8 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
+    env:
+      GOFLAGS: "-mod=mod"
     steps:
       - uses: actions/checkout@v4
 
